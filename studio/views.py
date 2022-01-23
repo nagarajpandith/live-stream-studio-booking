@@ -5,7 +5,7 @@ from django.views.generic.base import TemplateView
 from django.core.mail import EmailMessage, message
 from django.conf import settings
 from django.contrib import messages
-from .models import Appointment
+from .models import Booking
 from django.views.generic import ListView
 import datetime
 from django.template import Context
@@ -30,8 +30,8 @@ class HomeTemplateView(TemplateView):
         return HttpResponse("Email sent successfully!")
 
 
-class AppointmentTemplateView(TemplateView):
-    template_name = "appointment.html"
+class BookingTemplateView(TemplateView):
+    template_name = "booking.html"
 
     def post(self, request):
         fname = request.POST.get("fname")
@@ -40,7 +40,7 @@ class AppointmentTemplateView(TemplateView):
         date = request.POST.get("date")
         message = request.POST.get("request")
 
-        appointment = Appointment.objects.create(
+        booking = Booking.objects.create(
             first_name=fname,
             last_name=lname,
             email=email,
@@ -48,29 +48,29 @@ class AppointmentTemplateView(TemplateView):
             request=message,
         )
 
-        appointment.save()
+        booking.save()
 
         messages.add_message(request, messages.SUCCESS, f"Thank you {fname} for booking the Studio, we will email you after confirmation! Your booked date is {date}.")
         return HttpResponseRedirect(request.path)
 
-class ManageAppointmentTemplateView(ListView):
-    template_name = "manage-appointments.html"
-    model = Appointment
-    context_object_name = "appointments"
+class ManageBookingTemplateView(ListView):
+    template_name = "manage-bookings.html"
+    model = Booking
+    context_object_name = "bookings"
     login_required = True
     paginate_by = 3
 
 
     def post(self, request):
         date = request.POST.get("date")
-        appointment_id = request.POST.get("appointment-id")
-        appointment = Appointment.objects.get(id=appointment_id)
-        appointment.accepted = True
-        appointment.accepted_date = datetime.datetime.now()
-        appointment.save()
+        booking_id = request.POST.get("booking-id")
+        booking = booking.objects.get(id=booking_id)
+        booking.accepted = True
+        booking.accepted_date = datetime.datetime.now()
+        booking.save()
 
         data = {
-            "fname":appointment.first_name,
+            "fname":booking.first_name,
             "date":date,
         }
 
@@ -79,18 +79,18 @@ class ManageAppointmentTemplateView(ListView):
             "About your Studio Booking",
             message,
             settings.EMAIL_HOST_USER,
-            [appointment.email],
+            [booking.email],
         )
         email.content_subtype = "html"
         email.send()
 
-        messages.add_message(request, messages.SUCCESS, f"You accepted the booking request of {appointment.first_name}")
+        messages.add_message(request, messages.SUCCESS, f"You accepted the booking request of {booking.first_name}")
         return HttpResponseRedirect(request.path)
 
 
     def get_context_data(self,*args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        appointments = Appointment.objects.all()
+        bookings = Booking.objects.all()
         context.update({   
             "title":"Manage Bookings"
         })

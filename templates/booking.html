@@ -74,12 +74,12 @@
         <div class="row d-flex justify-content-center">
             <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
                 <h3>
-                    Book an appointment
+                    Book the Studio
                 </h3>
-                <p class="blue-text">Use the following form to contact us and request an appointment..</p>
+                <p class="blue-text">Use the following form to contact us and request a booking..</p>
                 <div class="card">
                     
-                    <form class="form-card" method="POST" action="{% url 'appointment' %}">
+                    <form class="form-card" method="POST" action="{% url 'booking' %}">
                     {% csrf_token %}
                         <div class="row justify-content-between text-left">
                             <div class="form-group col-sm-6 flex-column d-flex"> 
