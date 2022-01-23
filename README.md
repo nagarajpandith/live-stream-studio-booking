@@ -23,3 +23,10 @@ python manage.py migrate
 
 Run server
 python manage.py runserver
+
+to authenticate urself
+python manage.py createsuperuser
+enter credentials
+
+Login on admin(http://127.0.0.1:8000/admin/)
+
