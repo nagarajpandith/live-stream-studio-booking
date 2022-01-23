@@ -5,4 +5,4 @@ def get_notification(request):
     data = {
         "count":count
     }
-    return 
+    return data
