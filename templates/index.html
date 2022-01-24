@@ -3,12 +3,12 @@
 {% block cta %}
 <div class="container hero">
         <div class="row">
-            <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
-                <h1>Exceptional Medical Care for All Ages.</h1>
+            <div class="col-12 col-lg-3 col-xl-5 offset-xl-1">
+                <h1 class="mt-30">Vishwa Konakni Smt Laxmi & Sri Nandagopal Shenoy, Kannur - Live Stream Studio</h1>
                 <p> At our Medical Center
                     we combine world class medicine
                     with compassionate care. </p>
-                    <a href="{% url 'booking' %}" class="btn btn-light btn-lg action-button" type="button">Book Studio</a>
+                    <a href="{% url 'booking' %}" style="background-color: #FCD980; color: #000; font-size: 17px;"class="btn btn-light btn-lg action-button" type="button">Book Studio &#8594;</a>
             </div>
 
         </div>
@@ -25,10 +25,22 @@
             </p>
         </div>
     </div>
-
-    <iframe class="latestVideoEmbed" vnum='0' cid="UCQa87yJ71wov2SZGhnyIBxg" width="600" height="340" frameborder="0" allowfullscreen></iframe>
-    <iframe class="latestVideoEmbed" vnum='1' cid="UCQa87yJ71wov2SZGhnyIBxg" width="600" height="340" frameborder="0" allowfullscreen></iframe>
-    <iframe class="latestVideoEmbed" vnum='2' cid="UCQa87yJ71wov2SZGhnyIBxg" width="600" height="340" frameborder="0" allowfullscreen></iframe>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <iframe class="latestVideoEmbed " vnum='0' cid="UCQa87yJ71wov2SZGhnyIBxg" width="500" height="340" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="col">
+          <iframe class="latestVideoEmbed" vnum='1' cid="UCQa87yJ71wov2SZGhnyIBxg" width="500" height="340" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="col">
+          <iframe class="latestVideoEmbed" vnum='2' cid="UCQa87yJ71wov2SZGhnyIBxg" width="500" height="340" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="col">
+          <iframe class="latestVideoEmbed" vnum='3' cid="UCQa87yJ71wov2SZGhnyIBxg" width="500" height="340" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
     var reqURL = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent("https://www.youtube.com/feeds/videos.xml?channel_id=");
@@ -44,6 +56,7 @@
       );
       }
       var iframes = document.getElementsByClassName('latestVideoEmbed');
+      console.log(iframes);
       for (var i = 0, len = iframes.length; i < len; i++) {
       loadVideo(iframes[i]);
       }
@@ -51,111 +64,21 @@
     
 </section><!-- End -->
 
-
-
-<section id="services">
-  <div class="bg-primary text-center py-5 mb-4">
-      <div class="container">
-        <h1 class="fw-light text-white">Services</h1>
-        <p class="overview">We provide compassionate and expert care to our community. You are at the center of everything we do. Let us be your healthcare partner.</p>
-      </div>
-    </div>
-  <div class="container">
-    <div class="row">
-      <!-- Team Member 1 -->
-      <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-0 shadow">
-          <img src="{% static 'img/service1.jpg' %}" class="card-img-top" alt="...">
-          <div class="card-body text-center">
-            <h5 class="card-title mb-0">Primary Care</h5>
-            <div class="card-text text-black-50">Your personalized medical professionals.</div>
-          </div>
-        </div>
-      </div>
-      <!-- Team Member 2 -->
-      <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-0 shadow">
-          <img src="{% static 'img/service2.jpg' %}" class="card-img-top" alt="...">
-          <div class="card-body text-center">
-            <h5 class="card-title mb-0">Dermatology</h5>
-            <div class="card-text text-black-50">Your skin care made easy.</div>
-          </div>
-        </div>
-      </div>
-      <!-- Team Member 3 -->
-      <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-0 shadow">
-          <img src="{% static 'img/service3.jpg' %}" class="card-img-top" alt="...">
-          <div class="card-body text-center">
-            <h5 class="card-title mb-0">Team Member</h5>
-            <div class="card-text text-black-50">Web Developer</div>
-          </div>
-        </div>
-      </div>
-      <!-- Team Member 4 -->
-      <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-0 shadow">
-          <img src="{% static 'img/service4.jpg' %}" class="card-img-top" alt="...">
-          <div class="card-body text-center">
-            <h5 class="card-title mb-0">PrEP Therapy</h5>
-            <div class="card-text text-black-50">Stay safe if you are at high exposure of HIV.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /.row -->
-  
-  </div>
-</section>
-
-<section class="text-center conatiner" style="margin-block:200px;" id="reviews">
-    <h2>Satisfied Patients</h2>
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Carousel indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>   
-        <!-- Wrapper for carousel items -->
-        <div class="carousel-inner">		
-            <div class="carousel-item active">
-                <div class="img-box"><img src="{% static 'img/patient1.jpg' %}" alt=""></div>
-                <p class="testimonial">Phasellus vitae suscipit justo. Mauris pharetra feugiat ante id lacinia. Etiam faucibus mauris id tempor egestas. Duis luctus turpis at accumsan tincidunt. Phasellus risus risus, volutpat vel tellus ac, tincidunt fringilla massa. Etiam hendrerit dolor eget rutrum.</p>
-                <p class="overview">Michael Holz</p>
-            </div>
-            <div class="carousel-item">
-                <div class="img-box"><img src="{% static 'img/patient2.jpg' %}" alt=""></div>
-                <p class="testimonial">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante. Vestibulum idac nisl bibendum scelerisque non non purus. Suspendisse varius nibh non aliquet.</p>
-                <p class="overview">Antonio Moreno</p>
-            </div>
-            <div class="carousel-item">
-                <div class="img-box"><img src="{% static 'img/patient3.jpg' %}" alt=""></div>
-                <p class="testimonial">Vestibulum quis quam ut magna consequat faucibus. Pellentesque eget nisi a mi suscipit tincidunt. Utmtc tempus dictum risus. Pellentesque viverra sagittis quam at mattis. Suspendisse potenti. Aliquam sit amet gravida nibh, facilisis gravida odio. Phasellus auctor velit.</p>
-                <p class="overview">Paula Wilson</p>
-                
-            </div>		
-        </div>
-
-    </div>
-
-</section>
-
-
-<section id="contact" class="card m-4 p-4">
+<section id="contact" class="footer-contact p-4 m-0">
     <div class="container">
-        <div class="row text-center">
+        <!-- <div class="row text-center">
           
             <div class="col-sm-6">
             <div class="contact-detail-box">
               <i class="far fa-envelope text-colored fa-3x"></i>
               <h4>Get In Touch</h4>
-              <abbr title="Phone">P:</abbr> (123) 456-7890<br>
-              E: <a href="mailto:email@email.com" class="text-muted">email@email.com</a>
+              <abbr title="Phone">Phone :</abbr>91 824 2231877, 2231887<br>
+              E-mail: <a href="mailto:worldkonkani@gmail.com" class="text-muted">worldkonkani@gmail.com</a>
             </div>
-          </div><!-- end col -->
+          </div> -->
+          <!-- end col -->
   
-          <div class="col-sm-6">
+          <!-- <div class="col-sm-6">
             <div class="contact-detail-box">
               <i class="fa fa-map-marker fa-3x text-colored"></i>
               <h4>Our Location</h4>
@@ -165,46 +88,48 @@
               San Francisco, CA 94107<br>
             </address>
             </div>
-          </div><!-- end col -->
+          </div> -->
+          <!-- end col -->
   
   
   
-        </div>
+        <!-- </div> -->
         <!-- end row -->
   
   
         <div class="row">
           <div class="col-sm-6">
             <div class="contact-map">
-              <iframe src="https://www.google.com/maps/embed/v1/place?q=New+York+University&amp;key=AIzaSyBSFRN6WWGYwmFi498qXXsD2UwkbmD74v4" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="width: 100%; height: 360px;"></iframe>
+              <!-- <iframe src="https://www.google.com/maps/embed/v1/place?q=New+York+University&amp;key=AIzaSyBSFRN6WWGYwmFi498qXXsD2UwkbmD74v4" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="width: 100%; height: 360px;"></iframe> -->
+              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15556.395209339667!2d74.875267!3d12.901368!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xfeef55fa11a155b0!2sWorld%20Konkani%20Centre!5e0!3m2!1sen!2sin!4v1643040522255!5m2!1sen!2sin"  frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="width: 100%; height: 360px;"></iframe>
             </div>
           </div><!-- end col -->
   
           <!-- Contact form -->
           <div class="col-sm-6">
-            <form role="form" name="ajax-form" id="ajax-form" method="post" class="form-main" action="{% url 'home' %}">
+            <form role="form" name="ajax-form" id="ajax-form" method="post" class="form-main contact-form" action="{% url 'home' %}">
             {% csrf_token %}
-              <div class="form-group">
+              <div class="form-group ">
                 <label for="name2">Name</label>
-                <input class="form-control" id="name2" name="name" type="text" placeholder="name">
+                <input class="form-control" id="name2" name="name" type="text" placeholder="Name" required>
                 <div class="error" id="err-name" style="display: none;">Please enter name</div>
               </div> <!-- /Form-name -->
   
               <div class="form-group">
                 <label for="email2">Email</label>
-                <input class="form-control" id="email2" name="email" type="text" placeholder="email">
+                <input class="form-control" id="email2" name="email" type="text" placeholder="E-mail" required>
                 <div class="error" id="err-emailvld" style="display: none;">E-mail is not a valid format</div> 
               </div> <!-- /Form-email -->
   
               <div class="form-group">
                 <label for="message2">Message</label>
-                <textarea class="form-control" id="message2" name="message" rows="5" placeholder="message">Message</textarea>
+                <textarea class="form-control" id="message2" name="message" rows="5" placeholder="Enter your Message here" required></textarea>
   
                 <div class="error" id="err-message" style="display: none;">Please enter message</div>
               </div> <!-- /col -->
   
               <div class="row">            
-                  <button type="submit" class="btn btn-primary btn-shadow btn-rounded w-md" id="send">Send</button>
+                  <button type="submit" class="btn btn-primary btn-shadow btn-rounded w-md ml-auto btn-send-mail" style="margin: 0 20px;" id="send">Send</button>
                 </div> <!-- /col -->
               </div> <!-- /row -->
   
