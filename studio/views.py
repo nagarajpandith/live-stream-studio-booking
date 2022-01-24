@@ -35,7 +35,7 @@ class BookingTemplateView(TemplateView):
 
     def post(self, request):
         fname = request.POST.get("fname")
-        lname = request.POST.get("fname")
+        lname = request.POST.get("lname")
         email = request.POST.get("email")
         date = request.POST.get("date")
         message = request.POST.get("request")

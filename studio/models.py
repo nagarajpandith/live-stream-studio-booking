@@ -6,7 +6,7 @@ class Booking(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
-    event_date = models.DateField(blank=True, null=True)
+    event_date = models.DateField(blank=True, null=True, unique=True, error_messages = {"unique":"Studio is already booked on that date. Please select a different date."})
     request = models.TextField(blank=True)
     sent_date = models.DateField(auto_now_add=True)
     accepted = models.BooleanField(default=False)
