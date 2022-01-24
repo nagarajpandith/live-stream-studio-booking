@@ -353,12 +353,12 @@
     <div class="container mt-5">
         <div class="col-11 text-center mt-4 mb-4">
             <h3>
-                Manage appointments
+                Manage bookings
             </h3>
         </div>
         <div class="row">
 
-        {% for app in appointments %}
+        {% for app in bookings %}
             <div class="col-lg-4">
                 <div class="card card-margin">
                     <div class="card-header no-border">
@@ -368,12 +368,12 @@
                         <div class="widget-49">
                             <div class="widget-49-title-wrapper">
                                 <div class="widget-49-date-primary">
-                                    <span class="widget-49-date-day">{{app.sent_date|date:"d"}}</span>
-                                    <span class="widget-49-date-month">{{app.sent_date|date:"M"}}</span>
+                                    <span class="widget-49-date-day">{{app.event_date|date:"d"}}</span>
+                                    <span class="widget-49-date-month">{{app.event_date|date:"M"}}</span>
                                 </div>
                                 <div class="widget-49-meeting-info">
                                     <span class="widget-49-pro-title">{{app.email}}</span>
-                                    <span class="widget-49-meeting-time">{{app.phone}}</span>
+                                    <span class="widget-49-meeting-time">{{app.sent_date}}</span>
                                 </div>
                             </div>
                             <div class="widget-49-meeting-points">
@@ -384,11 +384,8 @@
                             <form method="POST" action="{% url 'manage' %}">
                             {% csrf_token %}
                             <div class="form-group">
-                                <input type="date" name="date" class="form-control mb-2" 
-                                    placeholder="dd-mm-yyyy" value=""
-                                    min="1997-01-01" max="2030-12-31">
-                                    <input hidden="true" name="appointment-id" value="{{app.id}}">
-                                <input class="btn-block btn-primary form-control" type="submit" value="Accept">
+                                    <input hidden="true" name="booking-id" value="{{app.id}}">
+                                <input class="btn-block btn-primary form-control" type="submit" value="Accept Booking">
                             </div>
                             </form>
                             {% endif %}

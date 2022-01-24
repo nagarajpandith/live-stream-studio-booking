@@ -8,7 +8,7 @@
                 <p> At our Medical Center
                     we combine world class medicine
                     with compassionate care. </p>
-                    <a href="{% url 'appointment' %}" class="btn btn-light btn-lg action-button" type="button">Book an appointment</a>
+                    <a href="{% url 'booking' %}" class="btn btn-light btn-lg action-button" type="button">Book Studio</a>
             </div>
 
         </div>
@@ -20,48 +20,35 @@
 <section class="container py-5"  style="margin-block:200px;" id="team">
     <div class="row text-center ">
         <div class="col-lg-8 mx-auto">
-            <h1 class="display-4">Our Team</h1>
-            <p class="lead">Rely on established and competent professionals.
+            <h1 class="display-4">Watch our Recent Streams</h1>
+            <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates praesentium necessitatibus minus sapiente, obcaecati mollitia magni earum nulla animi aliquid tempora quia excepturi voluptatibus quidem sint nam laudantium rerum placeat..
             </p>
         </div>
     </div>
 
-    <div class="container">
-        <div class="row text-center">
-
-            <!-- Team item -->
-            <div class="col-xl-3 col-sm-6 mb-5">
-                <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{% static 'img/team1.jpg' %}" alt="" class=" mh-100img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
-                    <h5 class="mb-0">Dr Sai</h5>
-                    <span class="small text-uppercase text-muted">Consultant anesthesiologist</span>
-                </div>
-            </div><!-- End -->
-
-            <!-- Team item -->
-            <div class="col-xl-3 col-sm-6 mb-5">
-                <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{% static 'img/team2.jpg' %}" alt="" class=" mh-100 rounded-circle mb-3 img-thumbnail shadow-sm">
-                    <h5 class="mb-0">Dr Samuel </h5>
-                    <span class="small text-uppercase text-muted">Consultant cardiothoracic</span>
-                </div>
-            </div><!-- End -->
-
-            <!-- Team item -->
-            <div class="col-xl-3 col-sm-6 mb-5">
-                <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{% static 'img/team3.jpg' %}" alt="" class=" mh-100img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
-                    <h5 class="mb-0">Dr Sarra</h5>
-                    <span class="small text-uppercase text-muted">Consultant dermatologist</span>
-                </div>
-            </div><!-- End -->
-
-            <!-- Team item -->
-            <div class="col-xl-3 col-sm-6 mb-5">
-                <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{% static 'img/team4.png' %}" alt="" class=" mh-100img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
-                    <h5 class="mb-0">DR John</h5>
-                    <span class="small text-uppercase text-muted">Consultant Obstetrician</span>
-                </div>
-            </div><!-- End -->
-        </div>
-    </div>
+    <iframe class="latestVideoEmbed" vnum='0' cid="UCQa87yJ71wov2SZGhnyIBxg" width="600" height="340" frameborder="0" allowfullscreen></iframe>
+    <iframe class="latestVideoEmbed" vnum='1' cid="UCQa87yJ71wov2SZGhnyIBxg" width="600" height="340" frameborder="0" allowfullscreen></iframe>
+    <iframe class="latestVideoEmbed" vnum='2' cid="UCQa87yJ71wov2SZGhnyIBxg" width="600" height="340" frameborder="0" allowfullscreen></iframe>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+    var reqURL = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent("https://www.youtube.com/feeds/videos.xml?channel_id=");
+    function loadVideo(iframe) {
+    $.getJSON(reqURL + iframe.getAttribute('cid'),
+    function(data) {
+      var videoNumber = (iframe.getAttribute('vnum') ? Number(iframe.getAttribute('vnum')) : 0);
+      console.log(videoNumber);
+      var link = data.items[videoNumber].link;
+      id = link.substr(link.indexOf("=") + 1);
+      iframe.setAttribute("src", "https://youtube.com/embed/" + id + "?controls=0&autoplay=1");
+      }
+      );
+      }
+      var iframes = document.getElementsByClassName('latestVideoEmbed');
+      for (var i = 0, len = iframes.length; i < len; i++) {
+      loadVideo(iframes[i]);
+      }
+    </script>
+    
 </section><!-- End -->
 
 

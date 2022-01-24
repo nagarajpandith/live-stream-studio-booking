@@ -1,7 +1,7 @@
-from .models import Appointment
+from .models import Booking
 
 def get_notification(request):
-    count = Appointment.objects.filter(accepted=False).count()
+    count = Booking.objects.filter(accepted=False).count()
     data = {
         "count":count
     }
