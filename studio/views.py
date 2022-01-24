@@ -38,6 +38,7 @@ class BookingTemplateView(TemplateView):
         lname = request.POST.get("lname")
         email = request.POST.get("email")
         date = request.POST.get("date")
+        time = request.POST.get("time")
         message = request.POST.get("request")
 
         booking = Booking.objects.create(
@@ -45,6 +46,7 @@ class BookingTemplateView(TemplateView):
             last_name=lname,
             email=email,
             event_date=date,
+            event_time=time,
             request=message,
         )
 
@@ -52,14 +54,14 @@ class BookingTemplateView(TemplateView):
 
         email = EmailMessage(
             subject= f"{fname} from Live Stream Studio.",
-            body=f"{fname} has booked Live Stream Studio on {date} for {message}. Login as Admin to confirm booking.",
+            body=f"{fname} has booked Live Stream Studio on {date} at {time} for {message}. Login as Admin to confirm booking.",
             from_email=settings.EMAIL_HOST_USER,
             to=[settings.EMAIL_HOST_USER],
             reply_to=[email]
         )
         email.send()
 
-        messages.add_message(request, messages.SUCCESS, f"Thank you {fname} for booking the Studio, we will email you after confirmation! Your booked date is {date}.")
+        messages.add_message(request, messages.SUCCESS, f"Thank you {fname} for booking the Studio, we will email you after confirmation! Your booked date is {date} at {time}.")
         return HttpResponseRedirect(request.path)
 
 class ManageBookingTemplateView(ListView):
@@ -80,7 +82,8 @@ class ManageBookingTemplateView(ListView):
 
         data = {
             "fname":booking.first_name,
-            "date":date,
+            "date":booking.event_date,
+            "time":booking.event_time,
         }
 
         message = get_template('email.html').render(data)
