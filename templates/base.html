@@ -20,14 +20,15 @@
 <body>
 
   <div class="header" style="
-  background: rgb(177, 177, 177) url('../static/img/header.png') no-repeat fixed center
+  background:#1C1E53 url('../static/img/headerr.png') no-repeat fixed center;
   {% if "booking" in request.path %}
-  max-height:300px!important;min-height:300px!important;
+  max-height:0px!important;min-height:0px!important;
   {% endif %}
   ">
     
     <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
-        <div class="container"><a class="navbar-brand" href="{% url 'home' %}">Live Stream Studio Booking</a>
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">Live Stream Studio Booking</a>
             <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="navbar-toggler-icon"></span>
@@ -36,40 +37,34 @@
                 id="navcol-1">
                 <ul class="nav navbar-nav">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" href="#team">Our Team</a>
+                        <a class="nav-link active" href="{% url 'home' %}">Home</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" href="#services">Services</a>
+                        <a class="nav-link active" href="{% url 'booking'%}">Book</a>
                     </li>
                     
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" href="#reviews">Testimonial</a>
+                        <a class="nav-link active" href="#contact">Contact</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" href="#contact">Contact Us</a>
+                        <a class="nav-link active" href="#about">About</a>
                     </li>
                     {% if request.user.is_authenticated %}
                     <li class="nav-item" role="presentation">
                       <a class="nav-link active" href="{% url 'manage' %}">Manage</a>
                   </li>
                   <a href="{% url 'manage' %}" style="float: left;cursor:pointer;" aria-expanded="true" title="You Have 6 New Bookings">
-                    <i class="far fa-bell" style="font-size: 20px; float: left; color: black; margin-top: 13px; margin-left: 5px;">
+                    <i class="far fa-bell" style="font-size: 20px; float: left; color: white; margin-top: 13px; margin-left: 5px;">
                     </i>
                 </a>
                 <span class="badge badge-danger" style="height: 18px;">{{count}}</span>
                   {% endif %}
-
-                  
-         
                 </ul>
             </div>
         </div>
     </nav>
-   
    {% block cta %}{% endblock cta %}
 </div>
-
-
     {% block content %}{% endblock content %}
 
   <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
