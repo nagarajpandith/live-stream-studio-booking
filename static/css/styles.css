@@ -3,7 +3,7 @@
 ##############*/
 
 .header {
-  background: rgb(177, 177, 177) url("img/header.png") no-repeat fixed center;
+  background: #1c1e53 url("img/header.png") no-repeat fixed center;
   min-height: 1000px;
   font-family: "Source Sans Pro", sans-serif;
 }
@@ -368,7 +368,7 @@
 .logo i,
 .question-q-box,
 .social-circle li a:hover {
-  background-color: #f16000 !important;
+  background-color: #1c1e53 !important;
 }
 .title-box .title-alt,
 .text-colored,
@@ -377,11 +377,11 @@
 .navbar-custom .navbar-nav li a:focus,
 .navbar-custom .navbar-nav li a:active,
 .navbar-custom .navbar-nav li.active a {
-  color: #f16000;
+  color: #1c1e53;
 }
 
 .btn-primary {
-  border: 1px solid #f16000 !important;
+  border: 1px solid #1c1e53 !important;
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -401,8 +401,8 @@
 .open > .dropdown-toggle.btn-primary.focus,
 .open > .dropdown-toggle.btn-primary:focus,
 .open > .dropdown-toggle.btn-primary:hover {
-  background-color: #d85600 !important;
-  border: 1px solid #d85600 !important;
+  background-color: #1f2392 !important;
+  border: 1px solid #1f2392 !important;
 }
 
 .btn-shadow.btn-primary {
@@ -466,7 +466,8 @@
   }
 }
 /* Contact-Form */
-.contact-form {
+.contact-form,
+.booking-from {
   background-color: #f4f6fc;
   border-radius: 10px;
   padding: 20px;
@@ -476,3 +477,4 @@
   outline: none;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
+/* Booking-Form */

@@ -13,7 +13,9 @@
     }
 
     .form-control-label {
-        margin-bottom: 0
+        margin-bottom: 0;
+        color: #000;
+        font-weight: bold;
     }
 
     input,
@@ -25,7 +27,8 @@
         box-sizing: border-box;
         border: 1px solid #ccc;
         font-size: 18px !important;
-        font-weight: 300
+        font-weight: 300;
+        outline:none;
     }
 
     input:focus,
@@ -77,9 +80,9 @@
                     Book the Studio
                 </h3>
                 <p class="blue-text">Use the following form to contact us and request a booking..</p>
-                <div class="card">
+                <div class="card p-0">
                     
-                    <form class="form-card" method="POST" action="{% url 'booking' %}">
+                    <form class="form-card booking-from" method="POST" action="{% url 'booking' %}">
                     {% csrf_token %}
                         <div class="row justify-content-between text-left">
                             <div class="form-group col-sm-6 flex-column d-flex"> 
