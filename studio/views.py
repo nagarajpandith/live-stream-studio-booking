@@ -50,6 +50,15 @@ class BookingTemplateView(TemplateView):
 
         booking.save()
 
+        email = EmailMessage(
+            subject= f"{fname} from Live Stream Studio.",
+            body=f"{fname} has booked Live Stream Studio on {date} for {message}. Login as Admin to confirm booking.",
+            from_email=settings.EMAIL_HOST_USER,
+            to=[settings.EMAIL_HOST_USER],
+            reply_to=[email]
+        )
+        email.send()
+
         messages.add_message(request, messages.SUCCESS, f"Thank you {fname} for booking the Studio, we will email you after confirmation! Your booked date is {date}.")
         return HttpResponseRedirect(request.path)
 
