@@ -4,7 +4,7 @@
 
 .header {
   background: #1c1e53 url("img/header.png") no-repeat fixed center;
-  min-height: 1000px;
+  min-height: 30px;
   font-family: "Source Sans Pro", sans-serif;
 }
 
@@ -477,4 +477,3 @@
   outline: none;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
-/* Booking-Form */
