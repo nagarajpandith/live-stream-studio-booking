@@ -64,7 +64,7 @@ class ManageBookingTemplateView(ListView):
     def post(self, request):
         date = request.POST.get("date")
         booking_id = request.POST.get("booking-id")
-        booking = booking.objects.get(id=booking_id)
+        booking = Booking.objects.get(id=booking_id)
         booking.accepted = True
         booking.accepted_date = datetime.datetime.now()
         booking.save()
