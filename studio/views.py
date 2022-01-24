@@ -104,3 +104,6 @@ class ManageBookingTemplateView(ListView):
             "title":"Manage Bookings"
         })
         return context
+    #Custom 404
+    def error_404(request, exception):
+        return render(request, '404.html')
