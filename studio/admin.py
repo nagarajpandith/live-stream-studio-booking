@@ -5,12 +5,13 @@ from django.http import HttpResponse
 
 # Register your models here.
 class BookingAdmin(admin.ModelAdmin):
+    date_hierarchy = 'event_date'
     list_display = ("first_name", "first_name", "request", "event_date", "email",)
     list_filter = ("event_date",)
     actions=['export_as_csv']
     def export_as_csv(ModelAdmin, request, queryset):
         response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="bookingss.csv"'
+        response['Content-Disposition'] = 'attachment; filename="bookings.csv"'
         writer = csv.writer(response)
         writer.writerow(['Event Name', 'Event Date', 'First Name', 'Last Name', 'Email',])
         bookings = queryset.values_list('request', 'event_date', 'first_name', 'last_name', 'email',)
