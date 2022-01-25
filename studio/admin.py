@@ -6,8 +6,8 @@ from django.http import HttpResponse
 # Register your models here.
 class BookingAdmin(admin.ModelAdmin):
     date_hierarchy = 'event_date'
-    list_display = ("first_name", "first_name", "request", "event_date", "event_time","email",)
-    list_filter = ("event_date", "event_time")
+    list_display = ("first_name", "last_name", "request", "event_date", "event_time","email",)
+    list_filter = ("event_date",)
     actions=['export_as_csv']
     def export_as_csv(ModelAdmin, request, queryset):
         response = HttpResponse(content_type='text/csv')
