@@ -1,17 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block cta %}
-<div class="container hero">
+<!-- <div class="container hero">
         <div class="row">
             <div class="col-12 col-lg-4 col-xl-5 offset-xl-1">
-                <h1 class="mt-30">Vishwa Konakni Smt Laxmi & Sri Nandagopal Shenoy, Kannur - Live Stream Studio</h1>
-                <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                <h1 class="mt-30 hero-title">Vishwa Konakni Smt Laxmi & Sri Nandagopal Shenoy, Kannur - Live Stream Studio</h1>
+                <p class="hero-subtitle"> Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
                     <a href="{% url 'booking' %}" style="background-color: #FCD980; color: #000; font-size: 17px;"class="btn btn-light btn-lg action-button" type="button">Book Studio &#8594;</a>
             </div>
-
         </div>
-    </div>
-
+</div> -->
+<div class="container hero">
+  <div class="hero-box">
+    <h1 class="mt-30 hero-title">Vishwa Konakni Smt Laxmi & Sri Nandagopal Shenoy, Kannur - Live Stream Studio</h1>
+    <p class="hero-subtitle"> Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+        <a href="{% url 'booking' %}" style="background-color: #FCD980; color: #000; font-size: 17px;"class="btn btn-light btn-lg action-button" type="button">Book Studio &#8594;</a>
+</div>
+</div>
 {% endblock cta %}
 
 {% block content %}
@@ -46,7 +51,6 @@
     $.getJSON(reqURL + iframe.getAttribute('cid'),
     function(data) {
       var videoNumber = (iframe.getAttribute('vnum') ? Number(iframe.getAttribute('vnum')) : 0);
-      console.log(videoNumber);
       var link = data.items[videoNumber].link;
       id = link.substr(link.indexOf("=") + 1);
       iframe.setAttribute("src", "https://youtube.com/embed/" + id + "?controls=0&autoplay=1");
@@ -54,7 +58,6 @@
       );
       }
       var iframes = document.getElementsByClassName('latestVideoEmbed');
-      console.log(iframes);
       for (var i = 0, len = iframes.length; i < len; i++) {
       loadVideo(iframes[i]);
       }
