@@ -65,7 +65,7 @@
     
 </section><!-- End -->
 
-<section id="contact" class="footer-contact p-4 m-0">
+<section id="contact" class="footer-contact pt-4 m-0">
     <div class="container">
         <div class="row">
           <div class="col-sm-6">
@@ -76,8 +76,11 @@
   
           <!-- Contact form -->
           <div class="col-sm-6">
+            
             <form role="form" name="ajax-form" id="ajax-form" method="post" class="form-main contact-form" action="{% url 'home' %}">
             {% csrf_token %}
+          <h3>Contact us</h3>
+
               <div class="form-group ">
                 <label for="name2">Name</label>
                 <input class="form-control" id="name2" name="name" type="text" placeholder="Name" required>
@@ -106,9 +109,24 @@
           </div> <!-- end col -->
   
         </div> <!-- end row -->
-            
+        <div class="footer-social">
+          <div class="footer-social-contact">
+            <div><i class="fas fa-envelope"></i><span>example@mail.com</span></div>
+            <div><i class="fas fa-phone-square-alt"></i><span>1234567890</span></div>
+          </div>
+          <div class="footer-social-links">
+            <ul>
+              <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
+              <li><a href="#"><i class="fab fa-twitter-square"></i></a></li>
+              <li><a href="#"><i class="fab fa-instagram-square"></i></a></li>
+              <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-cc">
+        <p>	&copy;copyright 2022, world konkani center, Manglore</p>
       </div>
 </section>
-
 
 {% endblock content %}
