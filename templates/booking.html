@@ -106,23 +106,18 @@
                                 <input type="text" id="email" name="email" placeholder="Enter your Email" onblur="validate(3)"> 
                             </div>
 
-                            <div class="form-group col-sm-6 flex-column d-flex"> 
-                             <label class="form-control-label px-3">Event Date<span class="text-danger"> *</span></label> 
-                              <input type="date" id="date" name="date" placeholder="Enter Event Date" onblur="validate(4)"> 
+                            <div class="form-group sm-6 flex-column d-flex"> 
+                                <label class="form-control-label px-3">Event Name<span class="text-danger"> *</span></label> 
+                                <input type="text" id="ans" name="request" placeholder="Enter Event Name" onblur="validate(6)"></input> 
                             </div>
 
                         </div>
 
                         <div class="row justify-content-between text-left">
 
-                            <div class="form-group col-sm-6 flex-column d-flex"> 
-                                <label class="form-control-label px-3">Event Name<span class="text-danger"> *</span></label> 
-                                <input type="text" id="ans" name="request" placeholder="Enter Event Name" onblur="validate(6)"></input> 
-                            </div>
-
-                            <div class="form-group col-sm-6 flex-column d-flex"> 
-                                <label class="form-control-label px-3">Event Time<span class="text-danger"> *</span></label> 
-                                <input type="time" id="time" name="time" placeholder="Enter Event Time" onblur="validate(7)"></input> 
+                            <div class="form-group col-12 flex-column d-flex"> 
+                             <label class="form-control-label px-3">Event Date & Time<span class="text-danger"> *</span></label> 
+                              <input type="datetime-local" id="date" name="date" placeholder="YYYY-MM-DD HH:MM" onblur="validate(4)"> 
                             </div>
 
                         </div>
@@ -145,7 +140,6 @@
     v4 = document.getElementById("date");
     v5 = document.getElementById("job");
     v6 = document.getElementById("ans");
-    v7 = document.getElementById("time");
 
     flag1 = true;
     flag2 = true;
@@ -153,7 +147,6 @@
     flag4 = true;
     flag5 = true;
     flag6 = true;
-    flag7 = true;
 
     if(val>=1 || val==0) {
     if(v1.value == "") {
@@ -216,18 +209,8 @@
     flag6 = true;
     }
     }
-    if(val>=7 || val==0) {
-    if(v7.value == "") {
-    v7.style.borderColor = "red";
-    flag7 = false;
-    }
-    else {
-    v7.style.borderColor = "green";
-    flag7 = true;
-    }
-    }
 
-    flag = flag1 && flag2 && flag3 && flag4 && flag5 && flag6 && flag7;
+    flag = flag1 && flag2 && flag3 && flag4 && flag5 && flag6 ;
 
     return flag;
     }
