@@ -8,6 +8,7 @@ class BookingAdmin(admin.ModelAdmin):
     date_hierarchy = 'event_date'
     list_display = ("first_name", "last_name", "request", "event_date","email",)
     list_filter = ("event_date",)
+    #Export Data as csv
     actions=['export_as_csv']
     def export_as_csv(ModelAdmin, request, queryset):
         response = HttpResponse(content_type='text/csv')
