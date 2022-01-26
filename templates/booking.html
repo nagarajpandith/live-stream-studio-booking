@@ -79,15 +79,15 @@
                 <h3>
                     Book the Studio
                 </h3>
-                <p class="blue-text">Use the following form to contact us and request a booking..</p>
+                <p class="text-primary">Use the following form request a booking. We will mail you once the booking is confirmed.<br><span class="text-secondary">Please check your Spam inbox in case you did not receive Confirmation mail within 24hrs.</span></p>
                 <div class="card p-0">
                     
                     <form class="form-card booking-from" method="POST" action="{% url 'booking' %}">
                     {% csrf_token %}
                         <div class="row justify-content-between text-left">
+
                             <div class="form-group col-sm-6 flex-column d-flex"> 
-                            <label class="form-control-label px-3">First name<span class="text-danger"> *</span>
-                            </label> 
+                            <label class="form-control-label px-3">First name<span class="text-danger"> *</span></label> 
                             <input required type="text" id="fname" name="fname" placeholder="Enter your first name" onblur="validate(1)"> 
                         </div>
 
@@ -101,14 +101,13 @@
                         <div class="row justify-content-between text-left">
 
                             <div class="form-group col-sm-6 flex-column d-flex"> 
-                                <label class="form-control-label px-3">Email<span class="text-danger"> *</span>
-                                </label> 
-                                <input type="text" id="email" name="email" placeholder="Enter your Email" onblur="validate(3)"> 
+                                <label class="form-control-label px-3">Email<span class="text-danger"> *</span></label> 
+                                <input required type="text" id="email" name="email" placeholder="Enter your Email" onblur="validate(3)"> 
                             </div>
 
-                            <div class="form-group sm-6 flex-column d-flex"> 
+                            <div class="form-group col-sm-6 flex-column d-flex"> 
                                 <label class="form-control-label px-3">Event Name<span class="text-danger"> *</span></label> 
-                                <input type="text" id="ans" name="request" placeholder="Enter Event Name" onblur="validate(6)"></input> 
+                                <input required type="text" id="ans" name="request" placeholder="Enter Event Name" onblur="validate(4)"></input> 
                             </div>
 
                         </div>
@@ -117,7 +116,7 @@
 
                             <div class="form-group col-12 flex-column d-flex"> 
                              <label class="form-control-label px-3">Event Date & Time<span class="text-danger"> *</span></label> 
-                              <input type="datetime-local" id="date" name="date" placeholder="YYYY-MM-DD HH:MM" onblur="validate(4)"> 
+                              <input required type="datetime-local" id="date" name="date" placeholder="YYYY-MM-DD HH:MM" onblur="validate(5)"> 
                             </div>
 
                         </div>
@@ -137,16 +136,14 @@
     v1 = document.getElementById("fname");
     v2 = document.getElementById("lname");
     v3 = document.getElementById("email");
-    v4 = document.getElementById("date");
-    v5 = document.getElementById("job");
-    v6 = document.getElementById("ans");
+    v4 = document.getElementById("ans");
+    v5 = document.getElementById("date");
 
     flag1 = true;
     flag2 = true;
     flag3 = true;
     flag4 = true;
     flag5 = true;
-    flag6 = true;
 
     if(val>=1 || val==0) {
     if(v1.value == "") {
@@ -169,6 +166,7 @@
     flag2 = true;
     }
     }
+    
     if(val>=3 || val==0) {
     if(v3.value == "") {
     v3.style.borderColor = "red";
@@ -179,6 +177,7 @@
     flag3 = true;
     }
     }
+
     if(val>=4 || val==0) {
     if(v4.value == "") {
     v4.style.borderColor = "red";
@@ -189,6 +188,7 @@
     flag4 = true;
     }
     }
+
     if(val>=5 || val==0) {
     if(v5.value == "") {
     v5.style.borderColor = "red";
@@ -199,18 +199,8 @@
     flag5 = true;
     }
     }
-    if(val>=6 || val==0) {
-    if(v6.value == "") {
-    v6.style.borderColor = "red";
-    flag6 = false;
-    }
-    else {
-    v6.style.borderColor = "green";
-    flag6 = true;
-    }
-    }
 
-    flag = flag1 && flag2 && flag3 && flag4 && flag5 && flag6 ;
+    flag = flag1 && flag2 && flag3 && flag4 && flag5 ;
 
     return flag;
     }
