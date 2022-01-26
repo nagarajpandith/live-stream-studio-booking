@@ -1,3 +1,20 @@
+body{
+  overflow-x: hidden;
+}
+/* Scroll bar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(197, 197, 197);
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background: #1c1e53;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1f2392;
+}
 /*############
   HEADER
 ##############*/
@@ -500,4 +517,50 @@
   outline: none;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
-/* Carousel */
+/* Footers */
+.footer-social{
+  display: flex;
+  align-items:center;
+  justify-content: space-between;
+  padding: 20px 100px;
+}
+.footer-social-contact{
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+.footer-social-contact div{
+  display: flex;
+  align-items: center;
+  margin: 0 30px;
+}
+.footer-social-contact i{
+  padding: 0 10px;
+}
+.footer-social-links ul{
+  display: flex;
+  align-items: center;
+}
+.footer-social-links ul li{
+  display: block;
+  padding: 0 10px;
+}
+.footer-social-links ul li a{
+  text-decoration: none;
+}
+.footer-social i{
+  font-size: 30px;
+  color: #fff;
+  transition: all .2s;
+}
+.footer-social i:hover{
+  transform: scale(1.1);
+}
+.footer-cc{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  color: #000;
+  padding: 20px 0;
+}
