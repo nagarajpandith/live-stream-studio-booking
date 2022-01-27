@@ -81,6 +81,7 @@ class ManageBookingTemplateView(ListView):
         data = {
             "fname":booking.first_name,
             "date":booking.event_date,
+            "request":booking.request,
         }
 
         message = get_template('email.html').render(data)
