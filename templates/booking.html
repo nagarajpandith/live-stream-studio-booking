@@ -116,7 +116,7 @@
 
                             <div class="form-group col-12 flex-column d-flex"> 
                              <label class="form-control-label px-3">Event Date & Time<span class="text-danger"> *</span></label> 
-                              <input required type="datetime-local" id="date" name="date" placeholder="YYYY-MM-DD HH:MM" onblur="validate(5)"> 
+                              <input required type="text" id="date" name="date" placeholder="YYYY-MM-DD HH:MM" onblur="validate(5)"> 
                             </div>
 
                         </div>
@@ -132,6 +132,12 @@
 {% endblock content %}
   {% block footer %}{% endblock footer %}
   {% block script %}
+    $('#date').datetimepicker({
+        format: "Y-m-d H:i",
+        autoclose: true,
+        minDate: 0,
+    });
+
     function validate(val) {
     v1 = document.getElementById("fname");
     v2 = document.getElementById("lname");
