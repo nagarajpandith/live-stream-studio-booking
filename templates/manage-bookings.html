@@ -120,10 +120,10 @@ background-color: #fff; border: 1px solid #D85600 !important } .page-link:hover
             <div class="widget-49-title-wrapper">
               <div class="widget-49-date-primary">
                 <span class="widget-49-date-day"
-                  >{{app.event_date|date:"d"}}</span
+                  >{{app.sent_date|date:"d"}}</span
                 >
                 <span class="widget-49-date-month"
-                  >{{app.event_date|date:"M"}}</span
+                  >{{app.sent_date|date:"M"}}</span
                 >
               </div>
               <div class="widget-49-meeting-info">
@@ -143,9 +143,17 @@ background-color: #fff; border: 1px solid #D85600 !important } .page-link:hover
                 <input
                   class="btn-block btn-primary form-control"
                   type="submit"
-                  value="Accept Booking"
+                  value="Accept"
+                  name="_accept"
                 />
               </div>
+              <div class="form-group">
+                <input class="btn-block btn-danger form-control" name="_reject" type="submit" value="Reject" onclick= "ShowReason()" id="reject"/>
+            </div>
+            <div id="dvReason" style="display: none">
+              Reason:
+              <input required type="text" name="textReason" id="txtReason" placeholder="Please state the reason" />
+            </div>
             </form>
             {% endif %}
           </div>
@@ -184,3 +192,15 @@ background-color: #fff; border: 1px solid #D85600 !important } .page-link:hover
 
   {% endif %} {% endblock content %}
 </div>
+    
+    
+    {% block script %}
+    function ShowReason() {
+    let x = document.getElementById('reject')
+    if (x.value == "Reject") {
+        document.getElementById('dvReason').style.display = 'block'
+    } else {
+        document.getElementById('dvReason').style.display = 'none'
+    }
+    }
+  {% endblock script %}

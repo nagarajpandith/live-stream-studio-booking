@@ -132,6 +132,14 @@
 {% endblock content %}
   {% block footer %}{% endblock footer %}
   {% block script %}
+    {% comment %}
+    $('#date').datetimepicker({
+        format: "Y-m-d H:i",
+        autoclose: true,
+        minDate: 0,
+    });
+    {% endcomment %}
+
     function validate(val) {
     v1 = document.getElementById("fname");
     v2 = document.getElementById("lname");

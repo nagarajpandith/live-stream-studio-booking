@@ -1,6 +1,6 @@
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, request
 from django.views.generic.base import TemplateView
 from django.core.mail import EmailMessage, message
 from django.conf import settings
@@ -62,6 +62,7 @@ class BookingTemplateView(TemplateView):
         messages.add_message(request, messages.SUCCESS, f"Thank you {fname} for booking the Studio, we will email you after confirmation! Your booked date is {date}.")
         return HttpResponseRedirect(request.path)
 
+
 class ManageBookingTemplateView(ListView):
     template_name = "manage-bookings.html"
     model = Booking
@@ -69,12 +70,12 @@ class ManageBookingTemplateView(ListView):
     login_required = True
     paginate_by = 3
 
-
     def post(self, request):
         date = request.POST.get("date")
+        textReason = request.POST.get("textReason")
         booking_id = request.POST.get("booking-id")
         booking = Booking.objects.get(id=booking_id)
-        booking.accepted = True
+        booking.accepted = False
         booking.accepted_date = datetime.datetime.now()
         booking.save()
 
@@ -84,18 +85,30 @@ class ManageBookingTemplateView(ListView):
             "request":booking.request,
         }
 
-        message = get_template('email.html').render(data)
-        email = EmailMessage(
-            "About your Studio Booking",
-            message,
-            settings.EMAIL_HOST_USER,
-            [booking.email],
-        )
-        email.content_subtype = "html"
-        email.send()
+        if request.POST:    
+            if '_accept' in request.POST:
+                message = get_template('email.html').render(data)
+                email = EmailMessage(
+                "About your Studio Booking",
+                message,
+                settings.EMAIL_HOST_USER,
+                [booking.email],
+                )
+                email.content_subtype = "html"
+                email.send()
+                
+            elif '_reject' in request.POST:
+                email = EmailMessage(
+                subject= f"About the Studio Booking.",
+                body=f"Greetings {booking.first_name}. Unfortunately, your Booking had to be rejected due to {textReason}. Kindly book one more time.",
+                from_email=settings.EMAIL_HOST_USER,
+                to=[booking.email],
+                reply_to=[settings.EMAIL_HOST_USER]
+                )
+                email.send()
 
-        messages.add_message(request, messages.SUCCESS, f"You accepted the booking request of {booking.first_name}")
-        return HttpResponseRedirect(request.path)
+            messages.add_message(request, messages.SUCCESS, f"You accepted the booking request of {booking.first_name}")
+            return HttpResponseRedirect(request.path)
 
 
     def get_context_data(self,*args, **kwargs):
