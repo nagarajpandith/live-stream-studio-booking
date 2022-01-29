@@ -110,6 +110,7 @@
     </nav>
 
     {% block cta %}{% endblock cta %} {% block content %}{% endblock content %}
+    {% block footer_parent %}
     <!-- Footer -->
     <section id="contact" class="footer-contact pt-4 m-0">
       <div class="container">
@@ -156,6 +157,7 @@
         <p>&copy;copyright 2022, world konkani center, Manglore</p>
       </div>
     </section>
+    {% endblock %}
     <script
       type="text/javascript"
       src="{% static 'js/bootstrap.min.js' %}"

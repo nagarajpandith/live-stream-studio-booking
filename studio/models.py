@@ -7,6 +7,7 @@ class Booking(models.Model):
     last_name = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
     event_date = models.DateTimeField(blank=True, null=True)
+    end_date = models.DateTimeField(blank=True, null=True)
     request = models.CharField(max_length=50)
     sent_date = models.DateField(auto_now_add=True)
     accepted = models.BooleanField(default=False)

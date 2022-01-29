@@ -22,6 +22,7 @@ class BookingTemplateView(TemplateView):
         lname = request.POST.get("lname")
         email = request.POST.get("email")
         date = request.POST.get("date")
+        end_date = request.POST.get("end_date")
         message = request.POST.get("request")
 
         booking = Booking.objects.create(
@@ -29,6 +30,7 @@ class BookingTemplateView(TemplateView):
             last_name=lname,
             email=email,
             event_date=date,
+            end_date=end_date,
             request=message,
         )
 
@@ -109,4 +111,4 @@ class ContactUsTemplateView(TemplateView):
             reply_to=[email]
         )
         email.send()
-        return HttpResponse("Email sent successfully!")
+        return HttpResponseRedirect(request.path)

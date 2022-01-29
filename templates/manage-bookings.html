@@ -97,6 +97,8 @@ background-color: #fff; border: 1px solid #D85600 !important } .page-link:hover
 #024dbc } .page-link:focus { z-index: 3; outline: 0; box-shadow: none }
 
 {%endblock style %} 
+{% block footer_parent %}
+{% endblock %}
 {% block content %} 
 <div class="container mt-5" style="padding-top: 100px;">
   {% if messages %}
@@ -108,6 +110,7 @@ background-color: #fff; border: 1px solid #D85600 !important } .page-link:hover
       </div>
     </div>
   {% endif %}
+  {% if request.user.is_authenticated %}
   <div class="col-11 text-center mt-4 mb-4">
     <h3>Manage bookings</h3>
   </div>
@@ -131,7 +134,8 @@ background-color: #fff; border: 1px solid #D85600 !important } .page-link:hover
               </div>
               <div class="widget-49-meeting-info">
                 <span class="widget-49-pro-title">{{app.email}}</span>
-                <span class="widget-49-meeting-time">{{app.event_date}}</span>
+                <span class="widget-49-meeting-time">Starts at {{app.event_date}}</span>
+                <span class="widget-49-meeting-time">Ends at {{app.end_date}}</span>
               </div>
             </div>
             <div class="widget-49-meeting-points">
@@ -187,4 +191,7 @@ background-color: #fff; border: 1px solid #D85600 !important } .page-link:hover
 
   {% endif %} 
 </div>
+{% else %}
+	{% include "404.html" %}
+{% endif %}
 {% endblock content %}
