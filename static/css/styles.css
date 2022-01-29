@@ -1,3 +1,7 @@
+@import url('http://fonts.cdnfonts.com/css/gilroy-bold');
+*{
+  font-family: 'Gilroy-Light', sans-serif;
+}
 :root {
   /* --color-primary: #1c1e53; */
   --color-primary: #e41749;
@@ -72,9 +76,7 @@ body {
   color: #fff;
 }
 
-.navbar .navbar-toggler {
-  border-color: rgba(255, 255, 255, 0.3);
-}
+
 
 .navbar .navbar-toggler:hover,
 .navbar-toggler:focus {
@@ -107,6 +109,29 @@ body {
 }
 .navbar ul li {
   display: block;
+  margin-left: 20px;
+}
+.navbar ul li > a:after{
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: width .3s;
+}
+.navbar ul li > a:hover::after{
+  width: 100%;
+}
+.channel:after{
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #000;
+  transition: width .3s;
+}
+.channel:hover::after{
+width: 13%;
 }
 .header .action-button,
 .header .action-button:not(.disabled):active {
