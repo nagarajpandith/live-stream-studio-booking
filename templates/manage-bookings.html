@@ -143,7 +143,7 @@ background-color: #fff; border: 1px solid #D85600 !important } .page-link:hover
               <span>{{app.request}}</span>
             </div>
             <hr class="w-100" />
-            {% if app.accepted == False %}
+            {% if app.accepted == False and app.rejected == False %}
             <form method="POST" action="{% url 'manage' %}">
               {% csrf_token %}
               <div class="form-group">
@@ -151,8 +151,12 @@ background-color: #fff; border: 1px solid #D85600 !important } .page-link:hover
                 <input
                   class="btn-block btn-primary form-control"
                   type="submit"
-                  value="Accept Booking"
+                  value="Accept"
+                  name="_accept"
                 />
+              </div>
+              <div class="form-group">
+                <input class="btn-block btn-danger form-control" name="_reject" type="button" value="Reject" onclick= "ShowForm({{app.id}})" id="reject"/>
               </div>
             </form>
             {% endif %}
@@ -189,10 +193,49 @@ background-color: #fff; border: 1px solid #D85600 !important } .page-link:hover
       </ul>
     </nav>
   </div>
-
-  {% endif %} 
+  {% endif %}
+   <!-- Modal Reject -->
+   <div class="overlay"></div>
+   <div class="reason-modal" id="dvReason">
+     <div class="rej-nav">
+       <h4>Reject Booking</h4>
+       <i onclick="closeForm()" class="fas fa-times"></i>
+     </div>
+     <!-- <p class="rej-for"></p> -->
+     <form class="reason-form" method="POST" action="{% url 'manage' %}">
+       {% csrf_token %}
+       <input hidden="true" class="booking-rej" name="booking-id" value="" />
+       <div class="form-group">
+         <label for="txtReason">Reason:</label>
+         <textarea required type="text" name="textReason" id="txtReason" placeholder="Please state your reason here"></textarea>
+       </div>
+       <div class="form-group">
+         <input class="btn-block btn-danger form-control" name="_reject" type="submit" value="Send Message" id="reject"/>
+       </div>
+     </form>
+   </div>
 </div>
 {% else %}
 	{% include "404.html" %}
 {% endif %}
 {% endblock content %}
+
+{% block script %}
+function ShowForm(id) {
+  console.log(id);
+  let x = document.getElementById('reject')
+  document.querySelector(".booking-rej").value = id;
+  if (x.value == "Reject") {
+    document.getElementById('dvReason').style.display = 'block';
+  document.querySelector(".overlay").style.display="block";
+
+  } else {
+    document.getElementById('dvReason').style.display = 'none';
+    document.querySelector(".overlay").style.display="none";
+  }
+}
+function closeForm(){
+  document.getElementById('dvReason').style.display = 'none';
+  document.querySelector(".overlay").style.display="none";
+}
+{% endblock script %}
