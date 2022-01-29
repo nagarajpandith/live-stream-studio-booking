@@ -117,8 +117,9 @@ background-color: #fff; border: 1px solid #D85600 !important } .page-link:hover
   </div>
   <div class="row">
     {% for app in bookings %}
-    <div class="col-lg-4">
-      <div class="card card-margin">
+    <div class="col-lg-4" >
+      <div class="card card-margin" {% if app.rejected %}style="background-color: #F8AAA5;"{% endif %}
+      {% if app.accepted %}style="background-color: #B3F8A5;"{% endif %}>
         <div class="card-header no-border">
           <h5 class="card-title">{{app.first_name}} {{app.last_name}}</h5>
         </div>
