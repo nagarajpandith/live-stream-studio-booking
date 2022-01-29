@@ -100,9 +100,9 @@ background-color: #fff; border: 1px solid #D85600 !important } .page-link:hover
 {% block footer_parent %}
 {% endblock %}
 {% block content %} 
-<div class="container mt-5" style="margin-top: 100px;">
+<div class="container mt-5" style="margin-bottom: -100px;">
   {% if messages %}
-    <div class="card notification-card notification-invitation">
+    <div class="card notification-card notification-invitation" style="margin-top: 120px;">
       <div class="card-body">
         {% for message in messages %}
           <div class="card-title">{{message}}</div>
@@ -111,6 +111,7 @@ background-color: #fff; border: 1px solid #D85600 !important } .page-link:hover
     </div>
   {% endif %}
   {% if request.user.is_authenticated %}
+  <div style="margin-top: 250px;">
   <div class="col-11 text-center mt-4 mb-4">
     <h3>Manage bookings</h3>
   </div>
@@ -163,7 +164,7 @@ background-color: #fff; border: 1px solid #D85600 !important } .page-link:hover
     <h3>No booking requests.....</h3>
     {% endfor %}
   </div>
-
+  </div>
   {% if is_paginated %}
   <div class="wrapper">
     <nav aria-label="Page navigation example">
