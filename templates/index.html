@@ -2,13 +2,13 @@
 <div class="header">
   <div class="container hero">
     <div class="hero-box">
-      <pre><h1 class="my-20 hero-title">Smt Lakshmi & <br/>Sri Nandagopal Shenoy,<br/>Kannur -Live Stream Studio</h1></pre>
+      <pre><h1 class="hero-title" style="margin-bottom: -0.5px;">Smt Lakshmi & <br/>Sri Nandagopal Shenoy,<br/>Kannur -Live Stream Studio</h1></pre>
       <p class="hero-subtitle">
         Lorem ipsum dolor sit amet consectetur adipisicing elit.
       </p>
       <a
         href="{% url 'booking' %}"
-        style="background-color: #fcd980; color: #000; font-size: 17px"
+        style="background-color: #e41749; color: #fff; font-size: 17px; padding: 10px 20px 10px 20px;"
         class="btn btn-light btn-lg action-button"
         type="button"
         >Book Studio &#8594;</a
@@ -73,34 +73,36 @@
   </div>
 </div>
 {% endblock cta %} {% block content %}
-<section class="container" id="about">
+<div style="background-color: #F6F7F6">
+<section class="container" id="about" style="padding-top: 100px; margin-top: -100px; padding-bottom: 100px;">
   <div class="about-content">
-    <h3>About Live Stream Studio</h3>
-    <p style="text-align: justify">
+    <h3 class="fade display-6 py-1"><strong>About Live Stream Studio</strong></h3>
+    <p class="fade lead" style="text-align: justify; margin-right:100px;">
       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quam eaque
       maxime nesciunt odit voluptatem, officiis, expedita vel consectetur,
       doloribus nulla doloremque? Ex eveniet suscipit excepturi repudiandae
       impedit architecto, consequatur aliquid?
     </p>
   </div>
-  <img src="../static/img/4.jpg" class="p-10" alt="studio" />
+  <img class="fade" src="../static/img/4.jpg" class="p-10" alt="studio" />
 </section>
-
+</div>
 <section class="container py-5" style="margin-block: 100px" id="team">
   <div class="row text-center">
-    <div class="col-lg-8 mx-auto">
-      <h1 class="display-4">Watch our Recent Live Streams</h1>
-      <p class="lead py-5" style="text-align: justify">
+    <div class="fade col-lg-8 mx-auto">
+      <h1 class="fade display-6">Watch our Recent Live Streams</h1>
+      <p class="fade lead py-3" style="text-align: justify">
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates
         praesentium necessitatibus minus sapiente, obcaecati mollitia magni
         earum nulla animi aliquid tempora quia excepturi voluptatibus quidem
-        sint nam laudantium rerum placeat..
+        sint nam laudantium rerum placeat..<br><br>
+        <strong><a class="channel" href="https://youtube.com/channel/UCQa87yJ71wov2SZGhnyIBxg" target="_blank" style="text-decoration:none; color: #000;">View all &#8594;</a></strong>
       </p>
     </div>
   </div>
-  <div class="container vid-box">
+  <div class="container vid-box" style="margin-top: 20px;">
     <div class="row">
-      <div class="col">
+      <div class="fade col">
         <iframe
           class="latestVideoEmbed"
           vnum="0"
@@ -111,7 +113,7 @@
           allowfullscreen
         ></iframe>
       </div>
-      <div class="col">
+      <div class="fade col">
         <iframe
           class="latestVideoEmbed"
           vnum="1"
@@ -122,7 +124,7 @@
           allowfullscreen
         ></iframe>
       </div>
-      <div class="col">
+      <div class="fade col">
         <iframe
           class="latestVideoEmbed"
           vnum="2"
@@ -133,7 +135,7 @@
           allowfullscreen
         ></iframe>
       </div>
-      <div class="col">
+      <div class="fade col">
         <iframe
           class="latestVideoEmbed"
           vnum="3"
@@ -145,9 +147,22 @@
         ></iframe>
       </div>
     </div>
-  </div>
+  </section>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script>
+    /* FadeIn Scroll */
+    $(document).ready(function() {
+    $(window).scroll( function(){
+        $('.fade').each( function(i){
+            var bottom_of_object = $(this).position().top + $(this).outerHeight();
+            var bottom_of_window = $(window).scrollTop() + $(window).height();
+            if( bottom_of_window > bottom_of_object ){
+                $(this).animate({'opacity':'1'},500);  
+            }
+        }); 
+    });
+    });
+
     var reqURL =
       "https://api.rss2json.com/v1/api.json?rss_url=" +
       encodeURIComponent(

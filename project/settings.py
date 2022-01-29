@@ -19,6 +19,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -59,7 +60,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
-
+JAZZMIN_SETTINGS = {
+     # Welcome text on the login screen
+    "welcome_sign": "Welcome to Studio Booking Dashboard",
+    # Copyright on the footer
+    "copyright": "World Konkani Centre, Mangalore",
+    # Links to put along the top menu
+    "topmenu_links": [
+        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
+    ],
+}
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
