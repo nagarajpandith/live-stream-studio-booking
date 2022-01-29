@@ -76,8 +76,6 @@ body {
   color: #fff;
 }
 
-
-
 .navbar .navbar-toggler:hover,
 .navbar-toggler:focus {
   background: none;
@@ -210,6 +208,22 @@ width: 13%;
 }
 .carousel-indicators li.active {
   background: #888;
+}
+
+/* Pagination */
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: #fff !important;
+    background-color: #E31749 !important;
+    border-color: #E31749 !important;
+}
+
+.pagination>li>a{
+  border-color:#E31749 !important;
+  color: #E31749 !important;
 }
 
 /* Nav-Bar */
