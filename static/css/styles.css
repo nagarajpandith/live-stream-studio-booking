@@ -442,6 +442,51 @@ body {
   justify-content: center;
   padding: 10px 0;
 }
+/* Modal Reject */
+
+#dvReason{
+  display: none;
+  background-color: #fff;
+  width: 50vw;
+  border-radius: 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 9999;
+}
+.overlay{
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+}
+.reason-form{
+  padding: 10px 20px;
+}
+.reason-form .form-group{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.reason-form .form-group textarea{
+  width: 100%;
+  height: 300px;
+}
+.rej-nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px 20px;
+}
+.rej-nav i{
+  cursor: pointer;
+}
+
 /* RESPONSIVENESS*/
 @media (min-width: 768px) {
   .navbar {
