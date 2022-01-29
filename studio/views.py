@@ -109,4 +109,4 @@ class ContactUsTemplateView(TemplateView):
             reply_to=[email]
         )
         email.send()
-        return HttpResponse("Email sent successfully!")
+        return HttpResponseRedirect(request.path)

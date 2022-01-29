@@ -15,25 +15,26 @@
 {% block style %}
 
 body {
-  background-color: #95c2de;
+  background-color: #e41749;
 }
 
 .mainbox {
-  background-color: #95c2de;
+  background-color: #e41749;
   margin: auto;
   height: 600px;
   width: 600px;
   position: relative;
+  margin-top: 150px;
 }
 
-  .err {
+.err {
     color: #ffffff;
     font-family: 'Nunito Sans', sans-serif;
     font-size: 11rem;
     position:absolute;
     left: 20%;
     top: 8%;
-  }
+}
 
 .far {
   position: absolute;
@@ -43,14 +44,14 @@ body {
   color: #ffffff;
 }
 
- .err2 {
+.err2 {
     color: #ffffff;
     font-family: 'Nunito Sans', sans-serif;
     font-size: 11rem;
     position:absolute;
     left: 68%;
     top: 8%;
-  }
+}
 
 .msg {
     text-align: center;
@@ -69,6 +70,21 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+.msg{
+ font-size: 1rem; 
+}
+.err{
+  font-size: 4rem;
+}
+.err2{
+  font-size: 4rem;
+}
+.far{
+  font-size: 3.5rem;
+}
 }
 {% endblock style %}
 </style>
