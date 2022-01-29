@@ -34,19 +34,23 @@ class BookingTemplateView(TemplateView):
             request=message,
         )
 
-        booking.save()
+        q1 = Booking.objects.filter(event_date__gte=date).filter(end_date__lte=end_date)
+        if q1.exists:
+            messages.add_message(request, messages.SUCCESS, f"Sorry {fname}, the Studio is already booked at that time. Kindly choose any other time.")
+            return HttpResponseRedirect(request.path)
+        else:
+            booking.save()
+            email = EmailMessage(
+                subject= f"{fname} from Live Stream Studio.",
+                body=f"{fname} has booked Live Stream Studio on {date} for {message}. Login as Admin to confirm booking.",
+                from_email=settings.EMAIL_HOST_USER,
+                to=[settings.EMAIL_HOST_USER],
+                reply_to=[email]
+            )
+            email.send()
 
-        email = EmailMessage(
-            subject= f"{fname} from Live Stream Studio.",
-            body=f"{fname} has booked Live Stream Studio on {date} for {message}. Login as Admin to confirm booking.",
-            from_email=settings.EMAIL_HOST_USER,
-            to=[settings.EMAIL_HOST_USER],
-            reply_to=[email]
-        )
-        email.send()
-
-        messages.add_message(request, messages.SUCCESS, f"Thank you {fname} for booking the Studio, we will email you after confirmation! Your booked date is {date}.")
-        return HttpResponseRedirect(request.path)
+            messages.add_message(request, messages.SUCCESS, f"Thank you {fname} for booking the Studio, we will email you after confirmation! Your booked date is {date}.")
+            return HttpResponseRedirect(request.path)
 
 class ManageBookingTemplateView(ListView):
     template_name = "manage-bookings.html"
@@ -107,7 +111,7 @@ class ManageBookingTemplateView(ListView):
             "title":"Manage Bookings"
         })
         return context
-        
+
     #Custom 404
     def error_404(request, exception):
         return render(request, '404.html')
