@@ -142,7 +142,7 @@ background-color: #fff; border: 1px solid #D85600 !important } .page-link:hover
               <span>{{app.request}}</span>
             </div>
             <hr class="w-100" />
-            {% if app.accepted == False %}
+            {% if app.accepted == False and app.rejected == False %}
             <form method="POST" action="{% url 'manage' %}">
               {% csrf_token %}
               <div class="form-group">

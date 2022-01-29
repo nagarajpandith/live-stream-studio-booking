@@ -73,6 +73,8 @@ class ManageBookingTemplateView(ListView):
         if request.POST:    
             if '_accept' in request.POST:
                 message = get_template('email.html').render(data)
+                booking.accepted=True
+                booking.save()
                 email = EmailMessage(
                 subject="About your Studio Booking",
                 body=message,
@@ -83,6 +85,8 @@ class ManageBookingTemplateView(ListView):
                 email.send()
                 
             elif '_reject' in request.POST:
+                booking.rejected=True
+                booking.save()
                 email = EmailMessage(
                 subject= f"About the Studio Booking.",
                 body=f"Greetings {booking.first_name}. Unfortunately, your Booking had to be rejected due to {textReason}. Kindly book one more time.",
