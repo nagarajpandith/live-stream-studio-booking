@@ -13,22 +13,6 @@ from django.template.loader import render_to_string, get_template
 
 class HomeTemplateView(TemplateView):
     template_name = "index.html"
-    
-    def post(self, request):
-        name = request.POST.get("name")
-        email = request.POST.get("email")
-        message = request.POST.get("message")
-
-        email = EmailMessage(
-            subject= f"{name} from Live Stream Studio.",
-            body=message,
-            from_email=settings.EMAIL_HOST_USER,
-            to=[settings.EMAIL_HOST_USER],
-            reply_to=[email]
-        )
-        email.send()
-        return HttpResponse("Email sent successfully!")
-
 
 class BookingTemplateView(TemplateView):
     template_name = "booking.html"
@@ -108,3 +92,21 @@ class ManageBookingTemplateView(ListView):
     #Custom 404
     def error_404(request, exception):
         return render(request, '404.html')
+
+class ContactUsTemplateView(TemplateView):
+    template_name="contactUs.html"
+
+    def post(self, request):
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        message = request.POST.get("message")
+
+        email = EmailMessage(
+            subject= f"{name} from Live Stream Studio.",
+            body=message,
+            from_email=settings.EMAIL_HOST_USER,
+            to=[settings.EMAIL_HOST_USER],
+            reply_to=[email]
+        )
+        email.send()
+        return HttpResponse("Email sent successfully!")

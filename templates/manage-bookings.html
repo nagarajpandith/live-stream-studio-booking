@@ -1,5 +1,8 @@
-{% extends 'base.html' %} {% block style %} .card-margin { margin-bottom:
-1.875rem; } .card { border: 0; box-shadow: 0px 0px 10px 0px rgba(82, 63, 105,
+{% extends 'base.html' %} 
+{% block style %} 
+.card-margin { margin-bottom:
+1.875rem; } 
+.card { border: 0; box-shadow: 0px 0px 10px 0px rgba(82, 63, 105,
 0.1); -webkit-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
 -moz-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1); -ms-box-shadow: 0px
 0px 10px 0px rgba(82, 63, 105, 0.1); } .card { position: relative; display:
@@ -7,7 +10,8 @@ flex; flex-direction: column; min-width: 0; word-wrap: break-word;
 background-color: #ffffff; background-clip: border-box; border: 1px solid
 #e6e4e9; border-radius: 8px; } .card .card-header.no-border { border: 0; } .card
 .card-header { background: none; padding: 0 0.9375rem; font-weight: 500;
-display: flex; align-items: center; min-height: 50px; } .card-header:first-child
+display: flex; align-items: center; min-height: 50px; } 
+.card-header:first-child
 { border-radius: calc(8px - 1px) calc(8px - 1px) 0 0; } .widget-49
 .widget-49-title-wrapper { display: flex; align-items: center; } .widget-49
 .widget-49-title-wrapper .widget-49-date-primary { display: flex; align-items:
@@ -90,21 +94,20 @@ flex; justify-content: center; align-items: center } .page-link { position:
 relative; display: block; color: #D85600 !important; text-decoration: none;
 background-color: #fff; border: 1px solid #D85600 !important } .page-link:hover
 { z-index: 2; color: #fff !important; background-color: #D85600; border-color:
-#024dbc } .page-link:focus { z-index: 3; outline: 0; box-shadow: none } 
+#024dbc } .page-link:focus { z-index: 3; outline: 0; box-shadow: none }
 
-{% endblock style %}
- {% block content %}
- {% if messages %}
-<div class="card notification-card notification-invitation">
-  <div class="card-body">
-    {% for message in messages %}
-    <div class="card-title">{{message}}</div>
-    {% endfor %}
-  </div>
-</div>
-{% endif %}
-
-<div class="container mt-5">
+{%endblock style %} 
+{% block content %} 
+<div class="container mt-5" style="margin-top: 100px;">
+  {% if messages %}
+    <div class="card notification-card notification-invitation">
+      <div class="card-body">
+        {% for message in messages %}
+          <div class="card-title">{{message}}</div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
   <div class="col-11 text-center mt-4 mb-4">
     <h3>Manage bookings</h3>
   </div>
@@ -182,5 +185,6 @@ background-color: #fff; border: 1px solid #D85600 !important } .page-link:hover
     </nav>
   </div>
 
-  {% endif %} {% endblock content %}
+  {% endif %} 
 </div>
+{% endblock content %}

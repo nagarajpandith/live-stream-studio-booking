@@ -75,7 +75,7 @@
             </li>
 
             <li class="nav-item" role="presentation">
-              <a class="nav-link active" href="#contact">Contact</a>
+              <a class="nav-link active" href="{% url 'contact'%}">Contact</a>
             </li>
             <li class="nav-item" role="presentation">
               <a class="nav-link active" href="#about">About</a>
@@ -101,10 +101,8 @@
                 "
               >
               </i>
+            <span class="badge badge-dark" style="height: 20px;width: 20px;">{{count}}</span>
             </a>
-            <span class="badge badge-danger" style="height: 18px"
-              >{{count}}</span
-            >
             {% endif %}
           </ul>
         </div>
@@ -112,7 +110,52 @@
     </nav>
 
     {% block cta %}{% endblock cta %} {% block content %}{% endblock content %}
-
+    <!-- Footer -->
+    <section id="contact" class="footer-contact pt-4 m-0">
+      <div class="container">
+        <div class="footer-social">
+          <div class="footer-social-contact">
+            <div>
+              <i class="fas fa-envelope"></i><span>worldkonkani@gmail.com</span>
+            </div>
+            <div>
+              <i class="fas fa-phone-square-alt"></i><span>1234567890</span>
+            </div>
+          </div>
+          <div class="footer-social-links">
+            <ul>
+              <li>
+                <a href="https://www.facebook.com/worldkonkani" target="_blank"
+                  ><i class="fab fa-facebook-square"></i
+                ></a>
+              </li>
+              <li>
+                <a href="https://twitter.com/worldkonkani" target="_blank"
+                  ><i class="fab fa-twitter-square"></i
+                ></a>
+              </li>
+              <li>
+                <a
+                  href="https://www.instagram.com/vishwakonkani/"
+                  target="_blank"
+                  ><i class="fab fa-instagram-square"></i
+                ></a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/company/worldkonkanicentre/about/"
+                  target="_blank"
+                  ><i class="fab fa-linkedin"></i
+                ></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-cc">
+        <p>&copy;copyright 2022, world konkani center, Manglore</p>
+      </div>
+    </section>
     <script
       type="text/javascript"
       src="{% static 'js/bootstrap.min.js' %}"
