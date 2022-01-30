@@ -10,6 +10,7 @@ from django.views.generic import ListView
 import datetime
 from django.template import Context
 from django.template.loader import render_to_string, get_template
+from datetime import timedelta
 
 class HomeTemplateView(TemplateView):
     template_name = "index.html"
@@ -38,9 +39,10 @@ class BookingTemplateView(TemplateView):
             last_name=lname,
             email=email,
             event_date=date,
-            end_date=end_date,
+            end_date=datetime.datetime.strptime(end_date, "%Y-%m-%d %H:%M") + timedelta(minutes=30),
             request=message,
             )
+            print(end_date)
             booking.save()
             data = {
             "fname":"Admin",

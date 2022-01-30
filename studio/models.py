@@ -18,4 +18,4 @@ class Booking(models.Model):
         return self.request +" - [" + self.first_name + "]"
     
     class Meta:
-        ordering = ["-sent_date"]
+        ordering = ["sent_date"]
