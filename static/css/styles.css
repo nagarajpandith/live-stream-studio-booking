@@ -47,7 +47,7 @@ body {
   border-radius: 0;
   box-shadow: none;
   border: none;
-  z-index: 9999;
+  z-index: 999;
 }
 
 
@@ -482,13 +482,26 @@ width: 13%;
   padding: 10px 0;
 }
 /* Modal Reject */
-
+.status-icon{
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  border-radius: 50%;
+  background-color: #dfdfdf;
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+}
+.status-icon i{
+  font-size:30px;
+}
 #dvReason{
   display: none;
   background-color: #fff;
   width: 50vw;
   border-radius: 10px;
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%,-50%);
@@ -503,6 +516,7 @@ width: 13%;
   left: 0;
   background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(5px);
+  z-index: 9999;
 }
 .reason-form{
   padding: 10px 20px;
@@ -513,8 +527,10 @@ width: 13%;
   align-items: flex-start;
 }
 .reason-form .form-group textarea{
-  width: 100%;
+  width: 95%;
   height: 300px;
+  border:1px solid rgba(0, 0, 0, 0.5);
+  margin:0 auto;
 }
 .rej-nav{
   display: flex;
@@ -588,6 +604,9 @@ width: 13%;
   }
 }
 @media (max-width: 1000px) {
+  #dvReason{
+    width: 90vw;
+  }
   .header .hero h1 {
     font-size: 35px;
   }
@@ -615,6 +634,9 @@ width: 13%;
   }
   .header .hero .hero-box p {
     font-size: 18px;
+  }
+  .footer-social-contact{
+    flex-direction: column;
   }
 }
 @media (max-width: 482px) {
@@ -698,6 +720,9 @@ width: 13%;
   }
   .footer-social-links {
     padding-top: 20px;
+  }
+  .footer-social-links ul{
+    margin: 0;
   }
   #about {
     flex-direction: column;

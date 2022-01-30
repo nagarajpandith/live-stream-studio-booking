@@ -100,7 +100,7 @@ background-color: #fff; border: 1px solid #D85600 !important } .page-link:hover
 {% block footer_parent %}
 {% endblock %}
 {% block content %} 
-<div class="container mt-5" style="margin-bottom: -100px;">
+<div class="container mt-5" style="margin-bottom: 20px; padding-top: 10px;">
   {% if messages %}
     <div class="card notification-card notification-invitation" style="margin-top: 120px;">
       <div class="card-body">
@@ -111,15 +111,25 @@ background-color: #fff; border: 1px solid #D85600 !important } .page-link:hover
     </div>
   {% endif %}
   {% if request.user.is_authenticated %}
-  <div style="margin-top: 250px;">
+  <div style="margin-top: 140px;">
   <div class="col-11 text-center mt-4 mb-4">
     <h3>Manage bookings</h3>
   </div>
   <div class="row">
-    {% for app in bookings %}
+    {% for app in bookings reversed %}
     <div class="col-lg-4" >
-      <div class="card card-margin" {% if app.rejected %}style="background-color: #F8AAA5;"{% endif %}
-      {% if app.accepted %}style="background-color: #B3F8A5;"{% endif %}>
+      <div class="card card-margin">
+        <div class="status-icon">
+          {% if app.accepted%}
+          <i class="fas fa-calendar-check" style="color: green;"></i>
+          {% endif %}
+          {% if app.rejected %}
+          <i class="fas fa-calendar-times" style="color: red;"></i>
+          {% endif %}
+          {% if app.accepted == False and app.rejected == False %}
+          <i class="fas fa-calendar-plus" style="color: #FF6F3F;"></i>
+          {% endif %}
+        </div>
         <div class="card-header no-border">
           <h5 class="card-title">{{app.first_name}} {{app.last_name}}</h5>
         </div>
