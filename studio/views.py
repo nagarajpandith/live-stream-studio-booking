@@ -42,7 +42,6 @@ class BookingTemplateView(TemplateView):
             request=message,
             )
             booking.save()
-
             data = {
             "fname":"Admin",
             "lname":"",
@@ -67,7 +66,6 @@ class BookingTemplateView(TemplateView):
         else: 
             messages.add_message(request, messages.SUCCESS, f"We are extremely sorry {fname}, the studio is not available on {date} to {end_date}")
             return HttpResponseRedirect(request.path)
-
 
 class ManageBookingTemplateView(ListView):
     template_name = "manage-bookings.html"
@@ -137,7 +135,7 @@ class ManageBookingTemplateView(ListView):
             "title":"Manage Bookings"
         })
         return context
-        
+
     #Custom 404
     def error_404(request, exception):
         return render(request, '404.html')
