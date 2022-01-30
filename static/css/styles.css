@@ -569,6 +569,15 @@ width: 13%;
   }
 }
 @media (max-width: 1130px) {
+  .navbar-nav{
+    margin-left: -250px;
+  }
+  .navbar-brand{
+    font-size: 0.9rem;
+  }
+  .navbar-brand > img{
+    width:80px !important;
+  }
   .display-4{
     font-size: 40px;
   }
@@ -615,6 +624,9 @@ width: 13%;
   }
 }
 @media (max-width: 786px) {
+  .navbar-nav{
+    margin-left: 0px;
+  }
   .header .hero h1 {
     font-size: 30px;
     font-weight: 600;
@@ -730,8 +742,17 @@ width: 13%;
   #about .about-content {
     align-items: center;
   }
-
   #about img {
     width: 80%;
+  }
+  .navbar-brand{
+    font-size: 0.7rem;
+  }
+  .navbar-brand > img{
+    width:70px !important;
+    margin-left: 70px !important;
+  }
+  .navbar-toggler{
+    margin-top: -50px;
   }
 }
