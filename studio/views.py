@@ -41,11 +41,23 @@ class BookingTemplateView(TemplateView):
             accepted=True,
             )
             booking.save()
+
+            ed = booking.event_date
+            # Converting DateTime object to str
+            ed = datetime.datetime.strptime(ed,'%Y-%m-%d %H:%M')
+            # Converting 24 hr to user friendly format
+            ed = datetime.datetime.strftime(ed, '%-d %B, %Y, %I:%M %p')
+
+            #Removing 30 mins from end_date while mailing user
+            # Already converted to string while adding timedelta
+            end = booking.end_date - timedelta(minutes=30)
+            end = datetime.datetime.strftime(end, '%-d %B, %Y, %I:%M %p')
+
             data = {
             "name":name,
-            "date":booking.event_date,
+            "date":ed,
             "title":"Booking Confirmation",
-            "message":f"Thank you for booking our Live Stream Studio. Your Event has been booked for the event: {booking.request} from {booking.event_date} to {booking.end_date}."
+            "message":f"Thank you for booking our Live Stream Studio. Your Event has been booked for the event: {booking.request} from {ed} to {end}."
             }
             message = get_template('email.html').render(data)
 
@@ -58,11 +70,11 @@ class BookingTemplateView(TemplateView):
             )
             email.content_subtype = "html"
             email.send()
-
-            messages.add_message(request, messages.SUCCESS, f"Booking successful on {date} to {end_date} for the event : {message} by {name}")
+          
+            messages.add_message(request, messages.SUCCESS, f"Booking successful on {ed} to {end} for the event : {message} by {name}")
             return HttpResponseRedirect(request.path)
         else: 
-            messages.add_message(request, messages.SUCCESS, f"We are extremely sorry {name}, the studio is not available on {date} to {end_date}")
+            messages.add_message(request, messages.SUCCESS, f"We are extremely sorry {name}, the studio is not available on selected date and time.")
             return HttpResponseRedirect(request.path)
 
 class ManageBookingTemplateView(ListView):
