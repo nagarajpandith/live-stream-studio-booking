@@ -541,7 +541,17 @@ width: 13%;
 .rej-nav i{
   cursor: pointer;
 }
-
+.modal-msg{
+  position: fixed;
+  width: 90vw;
+  background-color: var(--color-primary);
+  color: #fff;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999;
+  margin: 0 auto;
+}
 /* RESPONSIVENESS*/
 @media (min-width: 768px) {
   .navbar {

@@ -62,7 +62,7 @@ class BookingTemplateView(TemplateView):
             email.content_subtype = "html"
             email.send()
 
-            messages.add_message(request, messages.SUCCESS, f"Booking successful on {date} to {end_date} for the event : {message} by {fname}")
+            messages.add_message(request, messages.SUCCESS, f"Booking successful on {date} to {end_date} for the event : {booking.request} by {fname}")
             return HttpResponseRedirect(request.path)
         else: 
             messages.add_message(request, messages.SUCCESS, f"We are extremely sorry {fname}, the studio is not available on {date} to {end_date}")

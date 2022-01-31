@@ -97,18 +97,31 @@ background-color: #fff; border: 1px solid #D85600 !important } .page-link:hover
 {% endblock %} 
 {% block content %}
 <div class="container mt-5" style="margin-bottom: 20px; padding-top: 10px">
-  {% if messages %}
-  <div
-    class="card notification-card notification-invitation"
-    style="margin-top: 120px"
-  >
-    <div class="card-body">
-      {% for message in messages %}
-      <div class="card-title">{{message}}</div>
-      {% endfor %}
-    </div>
-  </div>
-  {% endif %} {% if request.user.is_authenticated %}
+        {% if messages %}
+          <script>
+              $(document).ready(function(){
+              $("#modalMsg").modal('show');
+          });
+          </script>
+        {% endif %}
+        <div class="modal" tabindex="-1" role="dialog" id="modalMsg">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content" style="color: #fff;">
+                <div class="modal-header" style="background-color: var(--color-primary-dark);">
+                  <h5 class="modal-title">Booking Rejected</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff; font-size: 30px;">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body" style="color: #000;">
+                    {% for message in messages %}
+                        <p>{{message}} </p>
+                    {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+  {% if request.user.is_authenticated %}
   <div style="margin-top: 140px">
     <div class="col-11 text-center mt-4 mb-4">
       <h3>Manage bookings</h3>
