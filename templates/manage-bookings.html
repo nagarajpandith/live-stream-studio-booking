@@ -1,8 +1,6 @@
 {% extends 'base.html' %} 
-{% block style %} 
-.card-margin { margin-bottom:
-1.875rem; } 
-.card { border: 0; box-shadow: 0px 0px 10px 0px rgba(82, 63, 105,
+{% block style %} .card-margin { margin-bottom:
+1.875rem; } .card { border: 0; box-shadow: 0px 0px 10px 0px rgba(82, 63, 105,
 0.1); -webkit-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
 -moz-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1); -ms-box-shadow: 0px
 0px 10px 0px rgba(82, 63, 105, 0.1); } .card { position: relative; display:
@@ -10,8 +8,7 @@ flex; flex-direction: column; min-width: 0; word-wrap: break-word;
 background-color: #ffffff; background-clip: border-box; border: 1px solid
 #e6e4e9; border-radius: 8px; } .card .card-header.no-border { border: 0; } .card
 .card-header { background: none; padding: 0 0.9375rem; font-weight: 500;
-display: flex; align-items: center; min-height: 50px; } 
-.card-header:first-child
+display: flex; align-items: center; min-height: 50px; } .card-header:first-child
 { border-radius: calc(8px - 1px) calc(8px - 1px) 0 0; } .widget-49
 .widget-49-title-wrapper { display: flex; align-items: center; } .widget-49
 .widget-49-title-wrapper .widget-49-date-primary { display: flex; align-items:
@@ -95,90 +92,91 @@ relative; display: block; color: #D85600 !important; text-decoration: none;
 background-color: #fff; border: 1px solid #D85600 !important } .page-link:hover
 { z-index: 2; color: #fff !important; background-color: #D85600; border-color:
 #024dbc } .page-link:focus { z-index: 3; outline: 0; box-shadow: none }
-
 {%endblock style %} 
-{% block footer_parent %}
-{% endblock %}
-{% block content %} 
-<div class="container mt-5" style="margin-bottom: 20px; padding-top: 10px;">
+{% block footer_parent %} 
+{% endblock %} 
+{% block content %}
+<div class="container mt-5" style="margin-bottom: 20px; padding-top: 10px">
   {% if messages %}
-    <div class="card notification-card notification-invitation" style="margin-top: 120px;">
-      <div class="card-body">
-        {% for message in messages %}
-          <div class="card-title">{{message}}</div>
-        {% endfor %}
-      </div>
+  <div
+    class="card notification-card notification-invitation"
+    style="margin-top: 120px"
+  >
+    <div class="card-body">
+      {% for message in messages %}
+      <div class="card-title">{{message}}</div>
+      {% endfor %}
     </div>
-  {% endif %}
-  {% if request.user.is_authenticated %}
-  <div style="margin-top: 140px;">
-  <div class="col-11 text-center mt-4 mb-4">
-    <h3>Manage bookings</h3>
   </div>
-  <div class="row">
-    {% for app in bookings reversed %}
-    <div class="col-lg-4" >
-      <div class="card card-margin">
-        <div class="status-icon">
-          {% if app.accepted%}
-          <i class="fas fa-calendar-check" style="color: green;"></i>
-          {% endif %}
-          {% if app.rejected %}
-          <i class="fas fa-calendar-times" style="color: red;"></i>
-          {% endif %}
-          {% if app.accepted == False and app.rejected == False %}
-          <i class="fas fa-calendar-plus" style="color: #FF6F3F;"></i>
-          {% endif %}
-        </div>
-        <div class="card-header no-border">
-          <h5 class="card-title">{{app.first_name}} {{app.last_name}}</h5>
-        </div>
-        <div class="card-body pt-0">
-          <div class="widget-49">
-            <div class="widget-49-title-wrapper">
-              <div class="widget-49-date-primary">
-                <span class="widget-49-date-day"
-                  >{{app.sent_date|date:"d"}}</span
-                >
-                <span class="widget-49-date-month"
-                  >{{app.sent_date|date:"M"}}</span
-                >
-              </div>
-              <div class="widget-49-meeting-info">
-                <span class="widget-49-pro-title">{{app.email}}</span>
-                <span class="widget-49-meeting-time">Starts at {{app.event_date}}</span>
-                <span class="widget-49-meeting-time">Ends at {{app.end_date}}</span>
-              </div>
-            </div>
-            <div class="widget-49-meeting-points">
-              <span>{{app.request}}</span>
-            </div>
-            <hr class="w-100" />
-            {% if app.accepted == False and app.rejected == False %}
-            <form method="POST" action="{% url 'manage' %}">
-              {% csrf_token %}
-              <div class="form-group">
-                <input hidden="true" name="booking-id" value="{{app.id}}" />
-                <input
-                  class="btn-block btn-primary form-control"
-                  type="submit"
-                  value="Accept"
-                  name="_accept"
-                />
-              </div>
-              <div class="form-group">
-                <input class="btn-block btn-danger form-control" name="_reject" type="button" value="Reject" onclick= "ShowForm({{app.id}})" id="reject"/>
-              </div>
-            </form>
+  {% endif %} {% if request.user.is_authenticated %}
+  <div style="margin-top: 140px">
+    <div class="col-11 text-center mt-4 mb-4">
+      <h3>Manage bookings</h3>
+    </div>
+    <div class="row">
+      {% for app in bookings reversed %}
+      <div class="col-lg-4">
+        <div class="card card-margin">
+          <div class="status-icon">
+            {% if app.accepted%}
+            <i class="fas fa-calendar-check" style="color: green"></i>
+            {% endif %} {% if app.rejected %}
+            <i class="fas fa-calendar-times" style="color: red"></i>
+            {% endif %} {% if app.accepted == False and app.rejected == False %}
+            <i class="fas fa-calendar-plus" style="color: #ff6f3f"></i>
             {% endif %}
+          </div>
+          <div class="card-header no-border">
+            <h5 class="card-title">{{app.first_name}} {{app.last_name}}</h5>
+          </div>
+          <div class="card-body pt-0">
+            <div class="widget-49">
+              <div class="widget-49-title-wrapper">
+                <div class="widget-49-date-primary">
+                  <span class="widget-49-date-day"
+                    >{{app.sent_date|date:"d"}}</span
+                  >
+                  <span class="widget-49-date-month"
+                    >{{app.sent_date|date:"M"}}</span
+                  >
+                </div>
+                <div class="widget-49-meeting-info">
+                  <span class="widget-49-pro-title">{{app.email}}</span>
+                  <span class="widget-49-meeting-time"
+                    >Starts at {{app.event_date}}</span
+                  >
+                  <span class="widget-49-meeting-time"
+                    >Ends at {{app.end_date}}</span
+                  >
+                </div>
+              </div>
+              <div class="widget-49-meeting-points">
+                <span>{{app.request}}</span>
+              </div>
+              <hr class="w-100" />
+              {% if app.rejected == False %}
+              <form method="POST" action="{% url 'manage' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                  <input
+                    class="btn-block btn-danger form-control"
+                    name="_reject"
+                    type="button"
+                    value="Reject"
+                    onclick="ShowForm({{app.id}})"
+                    id="reject"
+                  />
+                </div>
+              </form>
+              {% endif %}
+            </div>
           </div>
         </div>
       </div>
+      {%empty%}
+      <h3>No booking requests.....</h3>
+      {% endfor %}
     </div>
-    {%empty%}
-    <h3>No booking requests.....</h3>
-    {% endfor %}
-  </div>
   </div>
   {% if is_paginated %}
   <div class="wrapper">
@@ -205,48 +203,58 @@ background-color: #fff; border: 1px solid #D85600 !important } .page-link:hover
     </nav>
   </div>
   {% endif %}
-   <!-- Modal Reject -->
-   <div class="overlay"></div>
-   <div class="reason-modal" id="dvReason">
-     <div class="rej-nav">
-       <h4>Reject Booking</h4>
-       <i onclick="closeForm()" class="fas fa-times"></i>
-     </div>
-     <!-- <p class="rej-for"></p> -->
-     <form class="reason-form" method="POST" action="{% url 'manage' %}">
-       {% csrf_token %}
-       <input hidden="true" class="booking-rej" name="booking-id" value="" />
-       <div class="form-group">
-         <label for="txtReason">Reason:</label>
-         <textarea required type="text" name="textReason" id="txtReason" placeholder="Please state your reason here"></textarea>
-       </div>
-       <div class="form-group">
-         <input class="btn-block btn-danger form-control" name="_reject" type="submit" value="Send Message" id="reject"/>
-       </div>
-     </form>
-   </div>
+  <!-- Modal Reject -->
+  <div class="overlay"></div>
+  <div class="reason-modal" id="dvReason">
+    <div class="rej-nav">
+      <h4>Reject Booking</h4>
+      <i onclick="closeForm()" class="fas fa-times"></i>
+    </div>
+    <!-- <p class="rej-for"></p> -->
+    <form class="reason-form" method="POST" action="{% url 'manage' %}">
+      {% csrf_token %}
+      <input hidden="true" class="booking-rej" name="booking-id" value="" />
+      <div class="form-group">
+        <label for="txtReason">Reason:</label>
+        <textarea
+          required
+          type="text"
+          name="textReason"
+          id="txtReason"
+          placeholder="Please state your reason here"
+        ></textarea>
+      </div>
+      <div class="form-group">
+        <input
+          class="btn-block btn-danger form-control"
+          name="_reject"
+          type="submit"
+          value="Send Message"
+          id="reject"
+        />
+      </div>
+    </form>
+  </div>
 </div>
-{% else %}
-	{% include "404.html" %}
-{% endif %}
-{% endblock content %}
-
-{% block script %}
-function ShowForm(id) {
-  console.log(id);
-  let x = document.getElementById('reject')
-  document.querySelector(".booking-rej").value = id;
-  if (x.value == "Reject") {
-    document.getElementById('dvReason').style.display = 'block';
-  document.querySelector(".overlay").style.display="block";
-
+{% else %} 
+{% include "404.html" %} 
+{% endif %} 
+{% endblock content %} 
+{% block script %} 
+function ShowForm(id) { 
+  console.log(id); 
+  let x = document.getElementById('reject');
+  document.querySelector(".booking-rej").value = id; 
+  if (x.value == "Reject") { 
+    document.getElementById('dvReason').style.display = 'block'; 
+    document.querySelector(".overlay").style.display="block"; 
   } else {
     document.getElementById('dvReason').style.display = 'none';
-    document.querySelector(".overlay").style.display="none";
-  }
-}
-function closeForm(){
+    document.querySelector(".overlay").style.display="none"; 
+  } 
+} 
+function closeForm(){ 
   document.getElementById('dvReason').style.display = 'none';
-  document.querySelector(".overlay").style.display="none";
-}
+  document.querySelector(".overlay").style.display="none"; 
+} 
 {% endblock script %}
