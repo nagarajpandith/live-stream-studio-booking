@@ -64,7 +64,7 @@ Website to book Live Stream Studio and Manage bookings.
     
     source env/bin/activate
     ```
-    If you are giving a different name then `env`, mention it in `.gitignore` first   
+    If you are giving a different name than `env`, mention it in `.gitignore` first   
 
 3. Install all the requirements
     ```bash

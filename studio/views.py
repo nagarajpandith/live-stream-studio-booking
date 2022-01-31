@@ -19,8 +19,7 @@ class BookingTemplateView(TemplateView):
     template_name = "booking.html"
 
     def post(self, request):
-        fname = request.POST.get("fname")
-        lname = request.POST.get("lname")
+        name = request.POST.get("name")
         email = request.POST.get("email")
         date = request.POST.get("date")
         end_date = request.POST.get("end_date")
@@ -34,8 +33,7 @@ class BookingTemplateView(TemplateView):
         q3=Booking.objects.exclude(rejected=True).filter(event_date__gte=date).filter(end_date__lte=end_date)
         if q1.count()==0 and q2.count()==0 and q3.count()==0:
             booking = Booking.objects.create(
-            first_name=fname,
-            last_name=lname,
+            name=name,
             email=email,
             event_date=date,
             end_date=datetime.datetime.strptime(end_date, "%Y-%m-%d %H:%M") + timedelta(minutes=30),
@@ -44,8 +42,7 @@ class BookingTemplateView(TemplateView):
             )
             booking.save()
             data = {
-            "fname":fname,
-            "lname":lname,
+            "name":name,
             "date":booking.event_date,
             "title":"Booking Confirmation",
             "message":f"Thank you for booking our Live Stream Studio. Your Event has been booked for the event: {booking.request} from {booking.event_date} to {booking.end_date}."
@@ -62,10 +59,10 @@ class BookingTemplateView(TemplateView):
             email.content_subtype = "html"
             email.send()
 
-            messages.add_message(request, messages.SUCCESS, f"Booking successful on {date} to {end_date} for the event : {message} by {fname}")
+            messages.add_message(request, messages.SUCCESS, f"Booking successful on {date} to {end_date} for the event : {message} by {name}")
             return HttpResponseRedirect(request.path)
         else: 
-            messages.add_message(request, messages.SUCCESS, f"We are extremely sorry {fname}, the studio is not available on {date} to {end_date}")
+            messages.add_message(request, messages.SUCCESS, f"We are extremely sorry {name}, the studio is not available on {date} to {end_date}")
             return HttpResponseRedirect(request.path)
 
 class ManageBookingTemplateView(ListView):
@@ -85,8 +82,7 @@ class ManageBookingTemplateView(ListView):
         booking.save()
 
         data = {
-            "fname":booking.first_name,
-            "lname":booking.last_name,
+            "name":booking.name,
             "date":booking.event_date,
             "request":booking.request,
         }
@@ -106,7 +102,7 @@ class ManageBookingTemplateView(ListView):
             #     )
             #     email.content_subtype = "html"
             #     email.send()
-            #     messages.add_message(request, messages.SUCCESS, f"You accepted the booking request for {booking.request} by {booking.first_name} {booking.last_name} on {booking.event_date} to {booking.end_date}.")
+            #     messages.add_message(request, messages.SUCCESS, f"You accepted the booking request for {booking.request} by {booking.name} on {booking.event_date} to {booking.end_date}.")
 
                 
             if '_reject' in request.POST:
@@ -125,7 +121,7 @@ class ManageBookingTemplateView(ListView):
                 )
                 email.content_subtype = "html"
                 email.send()
-                messages.add_message(request, messages.SUCCESS, f"You rejected the booking request for {booking.request} by {booking.first_name} {booking.last_name} on {booking.event_date} to {booking.end_date}")
+                messages.add_message(request, messages.SUCCESS, f"You rejected the booking request for {booking.request} by {booking.name} on {booking.event_date} to {booking.end_date}")
 
             return HttpResponseRedirect(request.path)
 
@@ -153,7 +149,7 @@ class ContactUsTemplateView(TemplateView):
         message = request.POST.get("message")
 
         data = {
-            "fname":"Admin",
+            "name":"Admin",
             "title":f"Message from {name}",
             "message":f"You have a message from {name}[{email}]-{message}"
         }
