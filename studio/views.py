@@ -27,13 +27,12 @@ class BookingTemplateView(TemplateView):
         message = request.POST.get("request")
         #Checking if booking already exists in range of event_date to end_date + 30 mins
         #Checking for date : START : end_date : END
-        q1 = Booking.objects.filter(event_date__lte=date).filter(end_date__gte=date)
+        q1 = Booking.objects.exclude(rejected=True).filter(event_date__lte=date).filter(end_date__gte=date)
         #Checking for START : date : END : end_date
-        q2 = Booking.objects.filter(event_date__lte=end_date).filter(end_date__gte=end_date)
+        q2 = Booking.objects.exclude(rejected=True).filter(event_date__lte=end_date).filter(end_date__gte=end_date)
         #Checking for date: START : END : end_date
-        q3=Booking.objects.filter(event_date__gte=date).filter(end_date__lte=end_date)
+        q3=Booking.objects.exclude(rejected=True).filter(event_date__gte=date).filter(end_date__lte=end_date)
         if q1.count()==0 and q2.count()==0 and q3.count()==0:
-
             booking = Booking.objects.create(
             first_name=fname,
             last_name=lname,
@@ -41,29 +40,29 @@ class BookingTemplateView(TemplateView):
             event_date=date,
             end_date=datetime.datetime.strptime(end_date, "%Y-%m-%d %H:%M") + timedelta(minutes=30),
             request=message,
+            accepted=True,
             )
-            print(end_date)
             booking.save()
             data = {
-            "fname":"Admin",
-            "lname":"",
+            "fname":fname,
+            "lname":lname,
             "date":booking.event_date,
-            "title":"Booking Request",
-            "message":f"You have a booking request from {booking.first_name} for the event: {booking.request} from {booking.event_date} to {booking.end_date}. Login as admin to confirm the booking."
+            "title":"Booking Confirmation",
+            "message":f"Thank you for booking our Live Stream Studio. Your Event has been booked for the event: {booking.request} from {booking.event_date} to {booking.end_date}."
             }
             message = get_template('email.html').render(data)
 
             email = EmailMessage(
-                subject= f"Live Stream Studio Booking - Booking request from {booking.first_name} {booking.last_name}",
+                subject= f"Live Stream Studio Booking - Booking confirmed.",
                 body=message,
                 from_email=settings.EMAIL_HOST_USER,
-                to=[settings.EMAIL_HOST_USER],
+                to=[booking.email],
                 reply_to=[email]
             )
             email.content_subtype = "html"
             email.send()
 
-            messages.add_message(request, messages.SUCCESS, f"Thank you {fname} for booking the Studio, we will email you after confirmation! Your booked date is {date} to {end_date}")
+            messages.add_message(request, messages.SUCCESS, f"Booking successful on {date} to {end_date} for the event : {message} by {fname}")
             return HttpResponseRedirect(request.path)
         else: 
             messages.add_message(request, messages.SUCCESS, f"We are extremely sorry {fname}, the studio is not available on {date} to {end_date}")
@@ -93,28 +92,29 @@ class ManageBookingTemplateView(ListView):
         }
 
         if request.POST:    
-            if '_accept' in request.POST:
-                data["title"]="Booking Confirmation"
-                data["message"]=f"Thank you for booking our Live Stream Studio. Your Event has been booked on for the event: {booking.request} from {booking.event_date} to {booking.end_date}."
-                message = get_template('email.html').render(data)
-                booking.accepted=True
-                booking.save()
-                email = EmailMessage(
-                subject="Your live stream studio booking has been approved.",
-                body=message,
-                from_email=settings.EMAIL_HOST_USER,
-                to=[booking.email],
-                )
-                email.content_subtype = "html"
-                email.send()
-                messages.add_message(request, messages.SUCCESS, f"You accepted the booking request for {booking.request} by {booking.first_name} {booking.last_name} on {booking.event_date} to {booking.end_date}.")
+            # if '_accept' in request.POST:
+            #     data["title"]="Booking Confirmation"
+            #     data["message"]=f"Thank you for booking our Live Stream Studio. Your Event has been booked on for the event: {booking.request} from {booking.event_date} to {booking.end_date}."
+            #     message = get_template('email.html').render(data)
+            #     booking.accepted=True
+            #     booking.save()
+            #     email = EmailMessage(
+            #     subject="Your live stream studio booking has been approved.",
+            #     body=message,
+            #     from_email=settings.EMAIL_HOST_USER,
+            #     to=[booking.email],
+            #     )
+            #     email.content_subtype = "html"
+            #     email.send()
+            #     messages.add_message(request, messages.SUCCESS, f"You accepted the booking request for {booking.request} by {booking.first_name} {booking.last_name} on {booking.event_date} to {booking.end_date}.")
 
                 
-            elif '_reject' in request.POST:
+            if '_reject' in request.POST:
                 data["title"]="Booking Declined"
                 data["message"]=f"Thank you for booking our Live Stream Studio. Unfortunately, Your booking had to be declined for the Event: {booking.request} on {booking.event_date} to {booking.end_date}, as {textReason}"
                 message = get_template('email.html').render(data)
                 booking.rejected=True
+                booking.accepted=False
                 booking.save()
                 email = EmailMessage(
                 subject= "Sorry, Your live stream studio booking has been declined.",
