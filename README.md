@@ -30,7 +30,7 @@ Website to book Live Stream Studio and Manage bookings.
     <li><a href="#installation">Installation</a></li>
     <li><a href="#development-notes">Development Notes</a></li>
     <li><a href="#screenshots">Screenshots</a></li>
-    <li><a href="#contributors">Contributors</a></li>
+    <li><a href="#project-maintainers">Project Maintainers</a></li>
     <li><a href="#license">License</a></li>
   </ol>
 </details>
@@ -64,7 +64,7 @@ Website to book Live Stream Studio and Manage bookings.
     
     source env/bin/activate
     ```
-If you are giving a different name then `env`, mention it in `.gitigonre` first   
+    If you are giving a different name then `env`, mention it in `.gitignore` first   
 
 3. Install all the requirements
     ```bash
@@ -86,7 +86,7 @@ If you are giving a different name then `env`, mention it in `.gitigonre` first
     python manage.py migrate
     ```
 6. Create a super user.
-    In django if you want to access admin page, you need to create an account first.
+    This is to access Admin panel and admin specific pages.
     ```djangotemplate
     python manage.py createsuperuser
     ```
