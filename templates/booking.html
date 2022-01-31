@@ -142,12 +142,14 @@
   {% block script %}
     $('#date').datetimepicker({
         format: "Y-m-d H:i",
+        step: 30,
         autoclose: true,
         minDate: 0,
     });
 
     $('#end_date').datetimepicker({
         format: "Y-m-d H:i",
+        step: 30,
         autoclose: true,
         minDate: 0,
     });
