@@ -1,3 +1,5 @@
+import sched
+from statistics import mode
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -11,6 +13,7 @@ import datetime
 from django.template import Context
 from django.template.loader import render_to_string, get_template
 from datetime import timedelta
+from django.shortcuts import render
 
 class HomeTemplateView(TemplateView):
     template_name = "index.html"
@@ -83,7 +86,7 @@ class ManageBookingTemplateView(ListView):
     context_object_name = "bookings"
     login_required = True
     paginate_by = 3
-
+              
     def post(self, request):
         date = request.POST.get("date")
         textReason = request.POST.get("textReason")
@@ -153,8 +156,6 @@ class ManageBookingTemplateView(ListView):
 class ContactUsTemplateView(TemplateView):
     template_name="contactUs.html"
 
-    
-    
     def post(self, request):
         name = request.POST.get("name")
         email = request.POST.get("email")
@@ -176,3 +177,20 @@ class ContactUsTemplateView(TemplateView):
         email.content_subtype = "html"
         email.send()
         return HttpResponseRedirect(request.path)
+
+class Schedule(ListView):
+    template_name = "schedule.html"
+    model = Booking
+    context_object_name = "schedule"
+    login_required = True
+    paginate_by = 10
+
+    def get_context_data(self,*args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        schedule = Booking.objects.all()
+        #query = schedule.filter(event_date__gte=datetime.datetime.now())
+        #print(query)
+        context.update({   
+            "title":"View Schedule",
+        })
+        return context

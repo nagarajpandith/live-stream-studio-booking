@@ -1,0 +1,60 @@
+{% extends 'base.html' %} 
+{% block content %} 
+
+{% block footer_parent %} 
+{% endblock %} 
+
+{% if request.user.is_authenticated %}
+<h1 style="margin-top: 150px;">Upcoming Events</h1>
+<div class="events">
+<table style="width:100%">
+  <tr>
+    <th>Name</th>
+    <th>Event</th>
+    <th>Email</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+  {% for bookings in schedule %}
+  <tr>
+    <td>{{bookings.name}}</td>
+    <td>{{bookings.request}}</td>
+    <td>{{bookings.email}}</td>
+    <td>{{bookings.event_date}}</td>
+    <td>{{bookings.end_date}}</td>
+  </tr>
+  {% endfor %}
+</table>
+</div>
+
+{% if is_paginated %}
+  <div class="wrapper">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a>
+        </li>
+        {% endif %} 
+        {% for number in page_obj.paginator.page_range %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{number}}">{{number}}</a>
+        </li>
+        {% endfor %} 
+        {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{page_obj.next_page_number}}">Next</a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+{% endif %}
+
+{% else %} 
+{% include "404.html" %} 
+{% endif %} 
+{% endblock content %}
