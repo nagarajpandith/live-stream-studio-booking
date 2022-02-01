@@ -1,3 +1,5 @@
+import sched
+from statistics import mode
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.http import HttpResponse, request
@@ -11,6 +13,7 @@ import datetime
 from django.template import Context
 from django.template.loader import render_to_string, get_template
 from datetime import timedelta
+from django.shortcuts import render
 
 class HomeTemplateView(TemplateView):
     template_name = "index.html"
@@ -19,8 +22,7 @@ class BookingTemplateView(TemplateView):
     template_name = "booking.html"
 
     def post(self, request):
-        fname = request.POST.get("fname")
-        lname = request.POST.get("lname")
+        name = request.POST.get("name")
         email = request.POST.get("email")
         date = request.POST.get("date")
         end_date = request.POST.get("end_date")
@@ -34,8 +36,7 @@ class BookingTemplateView(TemplateView):
         q3=Booking.objects.exclude(rejected=True).filter(event_date__gte=date).filter(end_date__lte=end_date)
         if q1.count()==0 and q2.count()==0 and q3.count()==0:
             booking = Booking.objects.create(
-            first_name=fname,
-            last_name=lname,
+            name=name,
             email=email,
             event_date=date,
             end_date=datetime.datetime.strptime(end_date, "%Y-%m-%d %H:%M") + timedelta(minutes=30),
@@ -43,12 +44,24 @@ class BookingTemplateView(TemplateView):
             accepted=True,
             )
             booking.save()
+
+            ed = booking.event_date
+            # Converting DateTime object to str
+            ed = datetime.datetime.strptime(ed,'%Y-%m-%d %H:%M')
+            # Converting 24 hr to user friendly format
+            ed = datetime.datetime.strftime(ed, '%-d %B, %Y, %I:%M %p')
+
+            # Removing 30 mins from end_date while mailing user
+            # Already converted to string while adding timedelta
+            end = booking.end_date - timedelta(minutes=30)
+            # Converting to 12 hr format + removing date
+            end = datetime.datetime.strftime(end, '%I:%M %p')
+
             data = {
-            "fname":fname,
-            "lname":lname,
-            "date":booking.event_date,
+            "name":name,
+            "date":ed,
             "title":"Booking Confirmation",
-            "message":f"Thank you for booking our Live Stream Studio. Your Event has been booked for the event: {booking.request} from {booking.event_date} to {booking.end_date}."
+            "message":f"Thank you for booking our Live Stream Studio. Your Event has been booked for the event: {booking.request} from {ed} to {end}."
             }
             message = get_template('email.html').render(data)
 
@@ -61,11 +74,11 @@ class BookingTemplateView(TemplateView):
             )
             email.content_subtype = "html"
             email.send()
-
-            messages.add_message(request, messages.SUCCESS, f"Booking successful on {date} to {end_date} for the event : {booking.request} by {fname}")
+          
+            messages.add_message(request, messages.SUCCESS, f"Booking successful on {ed} to {end} for the event : {message} by {name}")
             return HttpResponseRedirect(request.path)
         else: 
-            messages.add_message(request, messages.SUCCESS, f"We are extremely sorry {fname}, the studio is not available on {date} to {end_date}")
+            messages.add_message(request, messages.SUCCESS, f"We are extremely sorry {name}, the studio is not available on selected date and time.")
             return HttpResponseRedirect(request.path)
 
 
@@ -75,7 +88,7 @@ class ManageBookingTemplateView(ListView):
     context_object_name = "bookings"
     login_required = True
     paginate_by = 3
-
+              
     def post(self, request):
         date = request.POST.get("date")
         textReason = request.POST.get("textReason")
@@ -86,11 +99,19 @@ class ManageBookingTemplateView(ListView):
         booking.save()
 
         data = {
-            "fname":booking.first_name,
-            "lname":booking.last_name,
+            "name":booking.name,
             "date":booking.event_date,
             "request":booking.request,
         }
+
+        dform = booking.event_date
+        # Converting 24 hr to user friendly format
+        dform = datetime.datetime.strftime(dform, '%-d %B, %Y, %I:%M %p')
+
+        # Removing 30 mins from end_date while mailing user
+        fform = booking.end_date - timedelta(minutes=30)
+        # Converting to 12 hr format + removing date
+        fform = datetime.datetime.strftime(fform, '%I:%M %p')
 
         if request.POST:    
             # if '_accept' in request.POST:
@@ -107,18 +128,18 @@ class ManageBookingTemplateView(ListView):
             #     )
             #     email.content_subtype = "html"
             #     email.send()
-            #     messages.add_message(request, messages.SUCCESS, f"You accepted the booking request for {booking.request} by {booking.first_name} {booking.last_name} on {booking.event_date} to {booking.end_date}.")
+            #     messages.add_message(request, messages.SUCCESS, f"You accepted the booking request for {booking.request} by {booking.name} on {booking.event_date} to {booking.end_date}.")
 
                 
             if '_reject' in request.POST:
                 data["title"]="Booking Declined"
-                data["message"]=f"Thank you for booking our Live Stream Studio. Unfortunately, Your booking had to be declined for the Event: {booking.request} on {booking.event_date} to {booking.end_date}, as {textReason}"
+                data["message"]=f"Thank you for booking our Live Stream Studio. Unfortunately, Your booking had to be declined for the Event: {booking.request} on {dform} to {fform}, as {textReason}"
                 message = get_template('email.html').render(data)
                 booking.rejected=True
                 booking.accepted=False
                 booking.save()
                 email = EmailMessage(
-                subject= "Sorry, Your live stream studio booking has been declined.",
+                subject= "Sorry, Your previously booked event at live stream studio booking has been declined.",
                 body=message,
                 from_email=settings.EMAIL_HOST_USER,
                 to=[booking.email],
@@ -126,7 +147,7 @@ class ManageBookingTemplateView(ListView):
                 )
                 email.content_subtype = "html"
                 email.send()
-                messages.add_message(request, messages.SUCCESS, f"You rejected the booking request for {booking.request} by {booking.first_name} {booking.last_name} on {booking.event_date} to {booking.end_date}")
+                messages.add_message(request, messages.SUCCESS, f"You rejected the booking request for {booking.request} by {booking.name} on {dform} to {fform}")
 
             return HttpResponseRedirect(request.path)
 
@@ -146,15 +167,13 @@ class ManageBookingTemplateView(ListView):
 class ContactUsTemplateView(TemplateView):
     template_name="contactUs.html"
 
-    
-    
     def post(self, request):
         name = request.POST.get("name")
         email = request.POST.get("email")
         message = request.POST.get("message")
 
         data = {
-            "fname":"Admin",
+            "name":"Admin",
             "title":f"Message from {name}",
             "message":f"You have a message from {name}[{email}]-{message}"
         }
@@ -169,3 +188,22 @@ class ContactUsTemplateView(TemplateView):
         email.content_subtype = "html"
         email.send()
         return HttpResponseRedirect(request.path)
+
+class Schedule(ListView):
+    template_name = "schedule.html"
+    model = Booking
+    context_object_name = "schedule"
+    login_required = True
+    paginate_by = 10
+
+    #holder = Booking.objects.all()
+    #query = holder.exclude(rejected=True).filter(event_date__gte=datetime.datetime.now())
+    #print(query)
+
+    def get_context_data(self,*args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        schedule = Booking.objects.all()
+        context.update({   
+            "title":"View Schedule",
+        })
+        return context
