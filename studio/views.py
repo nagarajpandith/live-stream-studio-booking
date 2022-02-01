@@ -51,10 +51,10 @@ class BookingTemplateView(TemplateView):
             # Converting 24 hr to user friendly format
             ed = datetime.datetime.strftime(ed, '%-d %B, %Y, %I:%M %p')
 
-            #Removing 30 mins from end_date while mailing user
+            # Removing 30 mins from end_date while mailing user
             # Already converted to string while adding timedelta
             end = booking.end_date - timedelta(minutes=30)
-            #Converting to 12 hr format + removing date
+            # Converting to 12 hr format + removing date
             end = datetime.datetime.strftime(end, '%I:%M %p')
 
             data = {
@@ -103,6 +103,15 @@ class ManageBookingTemplateView(ListView):
             "request":booking.request,
         }
 
+        dform = booking.event_date
+        # Converting 24 hr to user friendly format
+        dform = datetime.datetime.strftime(dform, '%-d %B, %Y, %I:%M %p')
+
+        # Removing 30 mins from end_date while mailing user
+        fform = booking.end_date - timedelta(minutes=30)
+        # Converting to 12 hr format + removing date
+        fform = datetime.datetime.strftime(fform, '%I:%M %p')
+
         if request.POST:    
             # if '_accept' in request.POST:
             #     data["title"]="Booking Confirmation"
@@ -123,13 +132,13 @@ class ManageBookingTemplateView(ListView):
                 
             if '_reject' in request.POST:
                 data["title"]="Booking Declined"
-                data["message"]=f"Thank you for booking our Live Stream Studio. Unfortunately, Your booking had to be declined for the Event: {booking.request} on {booking.event_date} to {booking.end_date}, as {textReason}"
+                data["message"]=f"Thank you for booking our Live Stream Studio. Unfortunately, Your booking had to be declined for the Event: {booking.request} on {dform} to {fform}, as {textReason}"
                 message = get_template('email.html').render(data)
                 booking.rejected=True
                 booking.accepted=False
                 booking.save()
                 email = EmailMessage(
-                subject= "Sorry, Your live stream studio booking has been declined.",
+                subject= "Sorry, Your previously booked event at live stream studio booking has been declined.",
                 body=message,
                 from_email=settings.EMAIL_HOST_USER,
                 to=[booking.email],
@@ -137,7 +146,7 @@ class ManageBookingTemplateView(ListView):
                 )
                 email.content_subtype = "html"
                 email.send()
-                messages.add_message(request, messages.SUCCESS, f"You rejected the booking request for {booking.request} by {booking.name} on {booking.event_date} to {booking.end_date}")
+                messages.add_message(request, messages.SUCCESS, f"You rejected the booking request for {booking.request} by {booking.name} on {dform} to {fform}")
 
             return HttpResponseRedirect(request.path)
 
@@ -186,11 +195,13 @@ class Schedule(ListView):
     login_required = True
     paginate_by = 10
 
+    #holder = Booking.objects.all()
+    #query = holder.exclude(rejected=True).filter(event_date__gte=datetime.datetime.now())
+    #print(query)
+
     def get_context_data(self,*args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         schedule = Booking.objects.all()
-        #query = schedule.filter(event_date__gte=datetime.datetime.now())
-        #print(query)
         context.update({   
             "title":"View Schedule",
         })
