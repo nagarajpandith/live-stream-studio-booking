@@ -2,7 +2,7 @@ import sched
 from statistics import mode
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, request
 from django.views.generic.base import TemplateView
 from django.core.mail import EmailMessage, message
 from django.conf import settings
@@ -80,6 +80,7 @@ class BookingTemplateView(TemplateView):
         else: 
             messages.add_message(request, messages.SUCCESS, f"We are extremely sorry {name}, the studio is not available on selected date and time.")
             return HttpResponseRedirect(request.path)
+
 
 class ManageBookingTemplateView(ListView):
     template_name = "manage-bookings.html"

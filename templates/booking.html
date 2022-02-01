@@ -69,14 +69,31 @@
     
     <div class="container-fluid px-1 py-5 mx-auto">
         {% if messages %}
-            <div class="card notification-card notification-invitation">
-                <div class="card-body">
+        <script>
+             $(document).ready(function(){
+            $("#modalMsg").modal('show');
+        });
+        </script>
+        
+        {% endif %}
+
+        <div class="modal" tabindex="-1" role="dialog" id="modalMsg">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content" style="color: #fff;">
+                <div class="modal-header" style="background-color: var(--color-primary-dark);">
+                  <h5 class="modal-title">Booking Status</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff; font-size: 30px;">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body" style="color: #000;">
                     {% for message in messages %}
-                        <div class="card-title">{{message}} </div>
+                        <p>{{message}} </p>
                     {% endfor %}
                 </div>
-            </div> 
-        {% endif %}
+              </div>
+            </div>
+          </div>
         <div class="row d-flex mt-100 justify-content-center" style="margin-top: 90px;width: 100vw;">
             <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
                 <h3>
