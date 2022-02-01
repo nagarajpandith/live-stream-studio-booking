@@ -54,7 +54,8 @@ class BookingTemplateView(TemplateView):
             #Removing 30 mins from end_date while mailing user
             # Already converted to string while adding timedelta
             end = booking.end_date - timedelta(minutes=30)
-            end = datetime.datetime.strftime(end, '%-d %B, %Y, %I:%M %p')
+            #Converting to 12 hr format + removing date
+            end = datetime.datetime.strftime(end, '%I:%M %p')
 
             data = {
             "name":name,
