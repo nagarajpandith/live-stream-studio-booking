@@ -75,7 +75,7 @@ class BookingTemplateView(TemplateView):
             email.content_subtype = "html"
             email.send()
           
-            messages.add_message(request, messages.SUCCESS, f"Booking successful on {ed} to {end} for the event : {message} by {name}")
+            messages.add_message(request, messages.SUCCESS, f"Booking successful on {ed} to {end} for the event : {booking.request} by {name}")
             return HttpResponseRedirect(request.path)
         else: 
             messages.add_message(request, messages.SUCCESS, f"We are extremely sorry {name}, the studio is not available on selected date and time.")
@@ -195,15 +195,6 @@ class Schedule(ListView):
     context_object_name = "schedule"
     login_required = True
     paginate_by = 10
-
-    #holder = Booking.objects.all()
-    #query = holder.exclude(rejected=True).filter(event_date__gte=datetime.datetime.now())
-    #print(query)
-
-    def get_context_data(self,*args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        schedule = Booking.objects.all()
-        context.update({   
-            "title":"View Schedule",
-        })
-        return context
+    #Overriding get_queryset() to filter 
+    def get_queryset(self):
+        return Booking.objects.exclude(rejected=True).filter(event_date__gte=datetime.datetime.now()).order_by("event_date")
