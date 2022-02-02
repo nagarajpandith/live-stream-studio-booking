@@ -1,4 +1,3 @@
-import sched
 from statistics import mode
 from turtle import st
 from django.http.response import HttpResponseRedirect
@@ -36,17 +35,34 @@ class BookingTemplateView(TemplateView):
         #Checking for date: START : END : end_date
         q3=Booking.objects.exclude(rejected=True).filter(event_date__gte=date).filter(end_date__lte=end_date)
 
-        #Avoiding booking time > 2 hours
-        #helper1 = datetime.datetime.strptime(date,'%Y-%m-%d %H:%M')
-        #st =  helper1.time()
-        #helper2 = datetime.datetime.strptime(end_date,'%Y-%m-%d %H:%M')
-        #et =  helper2.time()
-        #print(st)
-        #print(et)
+        #Avoiding booking time > 3 hours
+        helper1 = datetime.datetime.strptime(date,'%Y-%m-%d %H:%M')
+        st = helper1.time()
+        sd = helper1.date()
+        helper2 = datetime.datetime.strptime(end_date,'%Y-%m-%d %H:%M')
+        et = helper2.time()
+        eed = helper2.date()
+        # Create datetime objects for each time
+        helpert = datetime.datetime.combine(datetime.date.today(), et)
+        helpers = datetime.datetime.combine(datetime.date.today(), st)
+        # Difference between datetimes 
+        diff = helpert - helpers
+        # Difference in hours
+        diffh = diff.total_seconds() / 3600     
 
         #Avoiding invalid date inputs
         if date>=end_date:
             messages.add_message(request, messages.SUCCESS, f"Event start date cannot be after Event end date. Please select a valid date.")
+            return HttpResponseRedirect(request.path)
+
+        #Avoiding invalid date inputs
+        elif eed>sd:
+            messages.add_message(request, messages.SUCCESS, f"Event should not exceed more than a day. Please select a valid date.")
+            return HttpResponseRedirect(request.path)
+
+        #Avoiding booking time > 3 hours
+        elif (diffh > 3):
+            messages.add_message(request, messages.SUCCESS, f"Event time should not exceed 2 hours. Please select a valid time.")
             return HttpResponseRedirect(request.path)
 
         elif q1.count()==0 and q2.count()==0 and q3.count()==0:

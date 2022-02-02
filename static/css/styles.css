@@ -554,6 +554,14 @@ width: 13%;
   margin: 0 auto;
 }
 
+/* Booking Message */
+@media (max-width: 786px){
+.booking-msg{
+  margin-top: 150px !important;
+  margin-bottom: 130px !important;
+}
+}
+
 /* Schedule Page */
 .events{
   overflow-x: scroll;
