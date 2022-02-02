@@ -1,5 +1,6 @@
 import sched
 from statistics import mode
+from turtle import st
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.http import HttpResponse, request
@@ -34,7 +35,21 @@ class BookingTemplateView(TemplateView):
         q2 = Booking.objects.exclude(rejected=True).filter(event_date__lte=end_date).filter(end_date__gte=end_date)
         #Checking for date: START : END : end_date
         q3=Booking.objects.exclude(rejected=True).filter(event_date__gte=date).filter(end_date__lte=end_date)
-        if q1.count()==0 and q2.count()==0 and q3.count()==0:
+
+        #Avoiding booking time > 2 hours
+        #helper1 = datetime.datetime.strptime(date,'%Y-%m-%d %H:%M')
+        #st =  helper1.time()
+        #helper2 = datetime.datetime.strptime(end_date,'%Y-%m-%d %H:%M')
+        #et =  helper2.time()
+        #print(st)
+        #print(et)
+
+        #Avoiding invalid date inputs
+        if date>=end_date:
+            messages.add_message(request, messages.SUCCESS, f"Event start date cannot be after Event end date. Please select a valid date.")
+            return HttpResponseRedirect(request.path)
+
+        elif q1.count()==0 and q2.count()==0 and q3.count()==0:
             booking = Booking.objects.create(
             name=name,
             email=email,
@@ -77,6 +92,7 @@ class BookingTemplateView(TemplateView):
           
             messages.add_message(request, messages.SUCCESS, f"Booking successful on {ed} to {end} for the event : {booking.request} by {name}")
             return HttpResponseRedirect(request.path)
+
         else: 
             messages.add_message(request, messages.SUCCESS, f"We are extremely sorry {name}, the studio is not available on selected date and time.")
             return HttpResponseRedirect(request.path)
