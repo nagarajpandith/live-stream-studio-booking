@@ -5,33 +5,30 @@
 {% endblock %} 
 
 {% if request.user.is_authenticated %}
-<h1 style="margin-top: 150px;">Upcoming Events</h1>
+<h1 style="margin-top: 150px; font-size: 25px;text-align: center;">Upcoming Events</h1>
 <div class="events">
-<table style="width:100%">
-  <tr>
-    <th>Name</th>
-    <th>Event</th>
-    <th>Email</th>
-    <th>Start Date</th>
-    <th>End Date</th>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-  </tr>
-  {% for bookings in schedule %}
-  <tr>
-    <td>{{bookings.name}}</td>
-    <td>{{bookings.request}}</td>
-    <td>{{bookings.email}}</td>
-    <td>{{bookings.event_date}}</td>
-    <td>{{bookings.end_date}}</td>
-  </tr>
-  {% endfor %}
-</table>
+  <table class="schedule-table">
+    <tr>
+      <th>Name</th>
+      <th>Event</th>
+      <th>Email</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+    </tr>
+    {% for bookings in schedule %}
+    <tr>
+      <td class="cell-name">{{bookings.name}}</td>
+      <td class="cell-event">{{bookings.request}}</td>
+      <td class="cell-email">{{bookings.email}}</td>
+      <td class="cell-date">{{bookings.event_date}}</td>
+      <td class="cell-date">{{bookings.end_date}}</td>
+    </tr>
+    {% endfor %}
+  </table>
 </div>
 
 {% if is_paginated %}
-  <div class="wrapper">
+  <div class="wrapper schedule-paginator">
     <nav aria-label="Page navigation example">
       <ul class="pagination">
         {% if page_obj.has_previous %}

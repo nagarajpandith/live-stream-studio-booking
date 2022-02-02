@@ -64,7 +64,7 @@ class BookingTemplateView(TemplateView):
             # Converting DateTime object to str
             ed = datetime.datetime.strptime(ed,'%Y-%m-%d %H:%M')
             # Converting 24 hr to user friendly format
-            ed = datetime.datetime.strftime(ed, '%-d %B, %Y, %I:%M %p')
+            ed = datetime.datetime.strftime(ed, '%d %B, %Y, %I:%M %p')
 
             # Removing 30 mins from end_date while mailing user
             # Already converted to string while adding timedelta
