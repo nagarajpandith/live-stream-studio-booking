@@ -121,7 +121,7 @@ background-color: #fff; border: 1px solid #D85600 !important } .page-link:hover
               </div>
             </div>
           </div>
-  {% if request.user.is_authenticated %}
+  {% if user.is_superuser %}
   <div style="margin-top: 140px">
     <div class="col-11 text-center mt-4 mb-4">
       <h3>Manage bookings</h3>
