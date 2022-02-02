@@ -189,15 +189,12 @@ class ContactUsTemplateView(TemplateView):
         email.send()
         return HttpResponseRedirect(request.path)
 
-class Schedule(TemplateView):
+class Schedule(ListView):
     template_name = "schedule.html"
+    model = Booking
+    context_object_name = "schedule"
     login_required = True
-
-    def get_context_data(self,*args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        schedule =  Booking.objects.exclude(rejected=True).filter(event_date__gte=datetime.datetime.now()).order_by('event_date')
-        context.update({   
-            "schedule": schedule,
-            "title":"View Schedule",
-        })
-        return context
+    paginate_by = 10
+    #Overriding get_queryset() to filter 
+    def get_queryset(self):
+        return Booking.objects.exclude(rejected=True).filter(event_date__gte=datetime.datetime.now()).order_by("event_date")
