@@ -94,6 +94,7 @@
               </div>
             </div>
           </div>
+        {% if request.user.is_authenticated %}
         <div class="row d-flex mt-100 justify-content-center" style="margin-top: 90px;width: 100vw;">
             <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
                 <h3>
@@ -148,6 +149,13 @@
             </div>
         </div>
     </div>
+    {% else %} 
+    <div style="margin-top: 100px; margin-bottom: 100px;">
+    <h1 class="display-5">Please login as Admin to Book the Studio</h1>
+    <p style="text-align: left" class="text-primary">Note: Only Program coordinator is allowed to book Studio for now. Please contact dummy@email.com for bookings.</p>
+    <br><a  class="btn btn-success" href="{% url 'admin:index' %}">Login as Admin</a>
+    </div>
+    {% endif %} 
 
 {% endblock content %}
   {% block footer %}{% endblock footer %}

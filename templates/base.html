@@ -87,6 +87,8 @@
             <li class="nav-item" role="presentation">
               <a class="nav-link active" href="{% url 'schedule' %}">View Schedule</a>
             </li>
+            {% endif %}
+            {% if user.is_superuser %}
             <li class="nav-item" role="presentation">
               <a class="nav-link active" href="{% url 'manage' %}">Manage</a>
             </li>
