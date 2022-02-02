@@ -69,6 +69,10 @@ JAZZMIN_SETTINGS = {
     "topmenu_links": [
         {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
     ],
+    # Logo to use for your site, must be present in static files, used for brand on top left
+    "site_logo": "../static/img/favicon.png",
+    # CSS classes that are applied to the logo above
+    "site_logo_classes": "img-circle",
 }
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
