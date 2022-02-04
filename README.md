@@ -10,15 +10,12 @@
 </p>
   
 <p align="center">
-<a href="https://github.com/nagarajpandith/live-stream-studio-booking/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/nagarajpandith/live-stream-studio-booking?style=for-the-badge"></a>
-</p>
-
-<p align="center">
+<a href="https://github.com/nagarajpandith/live-stream-studio-booking/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/nagarajpandith/live-stream-studio-booking"></a>
 <a href="https://github.com/nagarajpandith/live-stream-studio-booking/"><img alt="GitHub stars" src="https://img.shields.io/github/last-commit/nagarajpandith/live-stream-studio-booking"></a>
-<a href="https://github.com/nagarajpandith/live-stream-studio-booking/blob/main/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/nagarajpandith/live-stream-studio-booking"></a>
+<a href="https://github.com/nagarajpandith/live-stream-studio-booking/blob/main/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/nagarajpandith/live-stream-studio-booking?label=license"></a>
 </p>
 
-## [Live-Stream Studio Booking Website](https://livestreamstudio.konkanischolarship.com/)
+## [Live-Stream Studio Booking Website](https://livestream.konkanischolarship.com/)
 Smt Lakshmi and Shri Nandagopal Shenoy, Kannur live stream studio is a world-class studio at the World Konkani Centre, donated by Shri Nandagopal Shenoy in the name of his grandparents. The studio aims at instilling the value of the Konkani language and culture in the hearts of the people belonging to the Konkani Community throughout the world. The World Konkani Centre thrives at organizing sessions through this wonderful space and fulfilling the objective laid by the leaders of the community.
 1. Backend Framework: **Django**
 2. Front-end Framework: **Bootstrap**
