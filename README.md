@@ -18,8 +18,8 @@
 <a href="https://github.com/nagarajpandith/live-stream-studio-booking/blob/main/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/nagarajpandith/live-stream-studio-booking"></a>
 </p>
 
-## [Live-Stream Studio Booking Website]()
-Website to book Live Stream Studio and Manage bookings. 
+## [Live-Stream Studio Booking Website](https://livestreamstudio.konkanischolarship.com/)
+Smt Lakshmi and Shri Nandagopal Shenoy, Kannur live stream studio is a world-class studio at the World Konkani Centre, donated by Shri Nandagopal Shenoy in the name of his grandparents. The studio aims at instilling the value of the Konkani language and culture in the hearts of the people belonging to the Konkani Community throughout the world. The World Konkani Centre thrives at organizing sessions through this wonderful space and fulfilling the objective laid by the leaders of the community.
 1. Backend Framework: **Django**
 2. Front-end Framework: **Bootstrap**
 
@@ -36,12 +36,14 @@ Website to book Live Stream Studio and Manage bookings.
 </details>
 
 ### Features
-- Responsive Full-stack Booking system
-- Automated mail notifications on form submissions & on accepting/rejecting bookings
-- Filter bookings on a range (Year/Month/Week/Day)
+- Responsive Full-stack Booking system.
+- Automated mail notifications on form submissions & on rejecting bookings.
+- Master-Manager Admin hierarchies with different permissions.
+- View filtered Upcoming events on View Schedule page.
+- Filter bookings on a range (Year/Month/Week/Day).
 - Export selected data as .csv
-- Manage bookings by Accepting/Rejecting 
-- Avoid duplicate booking with a gap of 30 minutes between each event
+- View and Manage bookings by Rejecting booking.
+- Avoid duplicate booking with a gap of 30 minutes between each event.
 
 ### Installation
 1. - Fork the [repo](https://github.com/nagarajpandith/live-stream-studio-booking)
@@ -74,8 +76,8 @@ Website to book Live Stream Studio and Manage bookings.
     ```python
    
    SK = 'Enter random character string'
-   EADDRESS= 'Enter your email'
-   EPASSWORD= 'Enter your email password'
+   EADDRESS = 'Enter your email'
+   EPASSWORD = 'Enter your email password'
 
     ```
     
@@ -96,6 +98,7 @@ Website to book Live Stream Studio and Manage bookings.
     ```bash
     python manage.py runserver
     ```
+> Additional: For Master-Manager Admin hierarchy, Create a Django admin without superuser access.
     
 ### Development Notes
 - If mailing causes SMTP Authentication errors, Enable [Less secure apps](https://www.google.com/settings/security/lesssecureapps) on your google account. If still facing the error, Enable [2FA](https://myaccount.google.com/signinoptions/two-step-verification/enroll-welcome?pli=1) and generate [App specific password](https://support.google.com/accounts/answer/185833?hl=en). Enter the 16 digit password generated in 'EPASSWORD' of .env file.
@@ -112,6 +115,8 @@ Website to book Live Stream Studio and Manage bookings.
     ALLOWED_HOSTS = ['your localhost url' or simply '*']
     ```
     in project/settings.py. 
+    
+- Users created as Staffs without superuser access are only permitted to view upcoming events and book the studio. Users with superuser access are permitted to Export bookings, view admin panel, reject bookings and rest of the functionalities included with staff users. 
 
 ### Screenshots
 - [Figma Prototype](https://www.figma.com/file/WwhHu8pqO9LTpj8t4LoQjQ/Live-Stream-Studio-Website-Prototype)
