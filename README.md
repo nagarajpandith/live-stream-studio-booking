@@ -122,19 +122,22 @@ Smt Lakshmi and Shri Nandagopal Shenoy, Kannur live stream studio is a world-cla
 - [Figma Prototype](https://www.figma.com/file/WwhHu8pqO9LTpj8t4LoQjQ/Live-Stream-Studio-Website-Prototype)
 
 - Home Page
-<img src="https://i.postimg.cc/zBC0xbjw/Screenshot-2022-01-30-at-10-22-46-PM.png" alt="Home Page">
+<img src="https://i.postimg.cc/SQ8F4Xqq/Screenshot-2022-02-04-at-10-09-49-PM.png" alt="Home Page">
 
 - Booking Form
-<img src="https://i.postimg.cc/65gnG6VB/Screenshot-2022-01-30-at-10-24-44-PM.png" alt="Booking Form">
+<img src="https://i.postimg.cc/JnzngbS1/Screenshot-2022-02-04-at-10-11-23-PM.png" alt="Booking Form">
 
 - Admin Panel
 <img src="https://i.postimg.cc/Hnj8VFVJ/Screenshot-2022-01-30-at-10-29-57-PM.png" alt="Admin Panel">
 
 - Manage Bookings Page
-<img src="https://i.postimg.cc/pTLp63Q0/Screenshot-2022-01-30-at-10-31-31-PM.png" alt="Manage Bookings">
+<img src="https://i.postimg.cc/1RLFgjLw/Screenshot-2022-02-04-at-10-22-13-PM.png" alt="Manage Bookings">
+
+- View Schedule Page
+<img src="" alt="Manage Bookings">
 
 - Example of an Automated mail
-<img src="https://i.postimg.cc/638GQD78/Screenshot-2022-01-30-at-10-36-31-PM.png" alt="Mail">
+<img src="https://i.postimg.cc/PxJXKd8J/Screenshot-2022-02-04-at-10-16-13-PM.png" alt="Mail">
 
 - 404 page to users on Admin-specific pages
 <img src="https://i.postimg.cc/sx1mRrbd/Screenshot-2022-01-31-at-8-57-49-AM.png" alt="404">
