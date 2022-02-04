@@ -134,7 +134,7 @@ Smt Lakshmi and Shri Nandagopal Shenoy, Kannur live stream studio is a world-cla
 <img src="https://i.postimg.cc/1RLFgjLw/Screenshot-2022-02-04-at-10-22-13-PM.png" alt="Manage Bookings">
 
 - View Schedule Page
-<img src="" alt="Manage Bookings">
+<img src="https://i.postimg.cc/yY1DSCLJ/Screenshot-2022-02-04-at-10-33-04-PM.png" alt="Manage Bookings">
 
 - Example of an Automated mail
 <img src="https://i.postimg.cc/PxJXKd8J/Screenshot-2022-02-04-at-10-16-13-PM.png" alt="Mail">
