@@ -11,7 +11,11 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>{{title}}</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/png" href="{% static '../static/img/favicon.png' %}"/>
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static '../static/img/favicon.png' %}"
+    />
     <!-- Bootstrap core CSS -->
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
     <link
@@ -52,11 +56,19 @@
     <!-- nav -->
     <nav class="navbar navbar-dark navbar-expand-xl navigation-clean-search">
       <div class="container">
-        <a class="navbar-brand" style="margin-right: 150px;" href="{% url 'home' %}"
+        <a
+          class="navbar-brand"
+          style="margin-right: 150px"
+          href="{% url 'home' %}"
           ><img
             src="../static/img/Logo.png"
             alt="Logo"
-            style="width: 100px; height: auto; margin-left:-25px; margin-right: 10px;"
+            style="
+              width: 100px;
+              height: auto;
+              margin-left: -25px;
+              margin-right: 10px;
+            "
           />Live Stream Studio Booking</a
         >
         <button
@@ -80,14 +92,17 @@
               <a class="nav-link active" href="{% url 'contact'%}">Contact</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link active" href="{% anchor 'home' 'about' %}">About</a>
+              <a class="nav-link active" href="{% anchor 'home' 'about' %}"
+                >About</a
+              >
             </li>
             {% if request.user.is_authenticated %}
             <li class="nav-item" role="presentation">
-              <a class="nav-link active" href="{% url 'schedule' %}">View Schedule</a>
+              <a class="nav-link active" href="{% url 'schedule' %}"
+                >View Schedule</a
+              >
             </li>
-            {% endif %}
-            {% if user.is_superuser %}
+            {% endif %} {% if user.is_superuser %}
             <li class="nav-item" role="presentation">
               <a class="nav-link active" href="{% url 'manage' %}">Manage</a>
             </li>
@@ -98,7 +113,7 @@
               aria-expanded="true"
               title="You Have 6 New Bookings"
             >
-              <i
+              <!-- <i
                 class="far fa-bell"
                 style="
                   font-size: 20px;
@@ -109,7 +124,9 @@
                 "
               >
               </i>
-            <span class="badge badge-dark" style="height: 20px;width: 20px;">{{count}}</span>
+              <span class="badge badge-dark" style="height: 20px; width: 20px"
+                >{{count}}</span
+              > -->
             </a>
             {% endif %}
           </ul>
@@ -125,9 +142,10 @@
         <div class="footer-social">
           <div class="footer-social-contact">
             <div>
-            <a href="mailto:wkc.archives@gmail.com">
-              <i class="fas fa-envelope"></i></a>
-            <span>wkc.archives@gmail.com</span>
+              <a href="mailto:wkc.archives@gmail.com">
+                <i class="fas fa-envelope"></i
+              ></a>
+              <span>wkc.archives@gmail.com</span>
             </div>
             <!-- <div>
               <i class="fas fa-phone-square-alt"></i><span>1234567890</span>
@@ -163,7 +181,7 @@
           </div>
         </div>
       </div>
-      <div class="footer-cc" style="background-color: #ECF0EE">
+      <div class="footer-cc" style="background-color: #ecf0ee">
         <p>&copy;All Rights Reserved 2022, World Konkani Centre, Mangalore</p>
       </div>
     </section>

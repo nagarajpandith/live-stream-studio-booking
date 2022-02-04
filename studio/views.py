@@ -52,7 +52,7 @@ class BookingTemplateView(TemplateView):
 
         #Avoiding invalid date inputs
         if date>=end_date:
-            messages.add_message(request, messages.SUCCESS, f"Event start date cannot be after Event end date. Please select a valid date.")
+            messages.add_message(request, messages.SUCCESS, f"Event start date cannot be after event end date. Please select a valid date.")
             return HttpResponseRedirect(request.path)
 
         #Avoiding invalid date inputs
