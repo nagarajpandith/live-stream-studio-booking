@@ -37,18 +37,18 @@ class BookingTemplateView(TemplateView):
 
         #Avoiding booking time > 3 hours
         helper1 = datetime.datetime.strptime(date,'%Y-%m-%d %H:%M')
-        st = helper1.time()
+        #st = helper1.time()
         sd = helper1.date()
         helper2 = datetime.datetime.strptime(end_date,'%Y-%m-%d %H:%M')
-        et = helper2.time()
+        #et = helper2.time()
         eed = helper2.date()
         # Create datetime objects for each time
-        helpert = datetime.datetime.combine(datetime.date.today(), et)
-        helpers = datetime.datetime.combine(datetime.date.today(), st)
+        #helpert = datetime.datetime.combine(datetime.date.today(), et)
+        #helpers = datetime.datetime.combine(datetime.date.today(), st)
         # Difference between datetimes 
-        diff = helpert - helpers
+        #diff = helpert - helpers
         # Difference in hours
-        diffh = diff.total_seconds() / 3600     
+        #diffh = diff.total_seconds() / 3600     
 
         #Avoiding invalid date inputs
         if date>=end_date:
@@ -61,9 +61,9 @@ class BookingTemplateView(TemplateView):
             return HttpResponseRedirect(request.path)
 
         #Avoiding booking time > 3 hours
-        elif (diffh > 3):
-            messages.add_message(request, messages.SUCCESS, f"Event time should not exceed 2 hours. Please select a valid time.")
-            return HttpResponseRedirect(request.path)
+        #elif (diffh > 3):
+            #messages.add_message(request, messages.SUCCESS, f"Event time should not exceed 2 hours. Please select a valid time.")
+            #return HttpResponseRedirect(request.path)
 
         elif q1.count()==0 and q2.count()==0 and q3.count()==0:
             booking = Booking.objects.create(
