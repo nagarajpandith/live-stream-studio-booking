@@ -1,5 +1,4 @@
 from statistics import mode
-from turtle import st
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.http import HttpResponse, request
