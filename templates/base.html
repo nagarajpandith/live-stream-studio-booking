@@ -58,7 +58,7 @@
       <div class="container">
         <a
           class="navbar-brand"
-          style="margin-right: 150px"
+          style="margin-right: 50px"
           href="{% url 'home' %}"
           ><img
             src="../static/img/Logo.png"
@@ -129,7 +129,10 @@
               > -->
             </a>
             <li class="nav-item" role="presentation">
-            <button class="btn-success"><a href="/admin/logout" class="logout">Logout</a></button>
+              <a class="nav-link active logout" href="/admin/logout">Logout</a>
+              <!-- <button class="btn-success">
+                <a href="/admin/logout" class="logout">Logout</a>
+              </button> -->
             </li>
             {% endif %}
           </ul>
