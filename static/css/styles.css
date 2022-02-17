@@ -121,6 +121,17 @@ body {
 .navbar ul li > a:hover::after{
   width: 100%;
 }
+
+.logout{
+  text-decoration: none;
+  color: white;
+}
+
+.logout:hover{
+  text-decoration: none;
+  color: white;
+}
+
 .channel:after{
   content: '';
   display: block;
