@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if messages %}
+{% for message in messages %}
+<div id="msg-container">
+    <p style="margin-top: 150px;">{{message}}</p>
+    {% if message.tags == "error" %}
+    <button onclick="hide()">Okay</button>
+    <button onclick="hide()">Cancel</button>
+    {% endif %}
+</div>
+{% endfor %}
+{% endif %}
+
+{% if request.user.is_authenticated %}
+{# seems to be some navbar position issue, that's the reason extra margins are used here, feel free to remove them while styling #}
+<div style="margin-top: 150px; margin-bottom: 50px;">
+<form method="POST" action="{% url 'wkc_booking' %}">
+{% csrf_token %}
+    <input required type="text" id="name" name="name" placeholder="Enter your Name"> 
+    <input required type="text" id="email" name="email" placeholder="Enter your Email"> 
+    <input required type="text" id="ans" name="request" placeholder="Enter Event Name">
+    <input required type="text" id="date" name="date" placeholder="YYYY-MM-DD HH:MM"> 
+    <input required type="text" id="end_date" name="end_date" placeholder="YYYY-MM-DD HH:MM"> 
+    <button type="submit">Book</button> 
+</form>
+</div>
+
+{% else %} 
+
+<div style="margin-top: 150px; margin-bottom: 50px;">
+Login as Admin to book
+</div>
+{% endif %} 
+{% endblock content %}
+
+{% block script %}
+$('#date').datetimepicker({
+    format: "Y-m-d H:i",
+    step: 30,
+    autoclose: true,
+    minDate: 0,
+});
+
+$('#end_date').datetimepicker({
+    format: "Y-m-d H:i",
+    step: 30,
+    autoclose: true,
+    minDate: 0,
+});
+
+function hide(){
+    var message_ele = document.getElementById("msg-container");
+    message_ele.style.display = "none"; 
+}
+{% endblock script %} 

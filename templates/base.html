@@ -12,7 +12,7 @@
     <title>{{title}}</title>
     <!-- Favicon -->
     <link
-      rel="shortcut icon"
+      rel="icon"
       type="image/png"
       href="{% static '../static/img/favicon.png' %}"
     />
@@ -86,8 +86,17 @@
               <a class="nav-link active" href="{% url 'home' %}">Home</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link active" href="{% url 'booking'%}">Book</a>
+              <a class="nav-link active" href="{% url 'booking'%}"
+                >Book Studio</a
+              >
             </li>
+            {% if user.is_superuser %}
+            <li class="nav-item" role="presentation">
+              <a class="nav-link active" href="{% url 'wkc_booking' %}"
+                >Book WKC</a
+              >
+            </li>
+            {% endif %}
             <li class="nav-item" role="presentation">
               <a class="nav-link active" href="{% url 'contact'%}">Contact</a>
             </li>
@@ -128,13 +137,13 @@
                 >{{count}}</span
               > -->
             </a>
+            {% endif %}
             <li class="nav-item" role="presentation">
               <a class="nav-link active logout" href="/admin/logout">Logout</a>
               <!-- <button class="btn-success">
                 <a href="/admin/logout" class="logout">Logout</a>
               </button> -->
             </li>
-            {% endif %}
           </ul>
         </div>
       </div>

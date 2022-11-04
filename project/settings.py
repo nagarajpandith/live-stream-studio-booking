@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'studio',
+    'wkc'
 ]
 
 MIDDLEWARE = [
@@ -68,14 +69,14 @@ JAZZMIN_SETTINGS = {
     # Links to put along the top menu
     "topmenu_links": [
         {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
-        {"name": "Book Studio", "url": "../make-a-booking/", "new_window": False},
+        {"name": "Book Studio", "url": "/make-a-booking/", "new_window": False},
     ],
     # Logo to use for your site, must be present in static files, used for brand on top left
     "site_logo": "../static/img/favicon.png",
     # CSS classes that are applied to the logo above
     "site_logo_classes": "img-circle",
     "usermenu_links": [
-        {"name": "Book Studio", "url": "../make-a-booking/", "new_window": False},
+        {"name": "Book Studio", "url": "/make-a-booking/", "new_window": False},
         {"model": "auth.user"}
     ],
 }
