@@ -1,5 +1,6 @@
 from statistics import mode
 from django.http.response import HttpResponseRedirect
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.http import HttpResponse, request
 from django.views.generic.base import TemplateView
@@ -12,8 +13,34 @@ import datetime
 from django.template import Context
 from django.template.loader import render_to_string, get_template
 from datetime import timedelta
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 # Create your views here.
+
+# Check for date clash:
+@csrf_exempt
+def check_date_clash(request):
+    body= json.loads(request.body.decode('utf-8'))
+    date = body['date']
+    end_date = body['end_date']
+    # Checking if booking already exists in range of event_date to end_date
+    # Checking for date : START : end_date : END
+    q1 = WKCBooking.objects.filter(event_date__lte=date).filter(end_date__gte=date)
+        # Checking for START : date : END : end_date
+    q2 = WKCBooking.objects.filter(event_date__lte=end_date).filter(
+            end_date__gte=end_date
+        )
+        # Checking for date: START : END : end_date
+    q3 = WKCBooking.objects.filter(event_date__gte=date).filter(
+            end_date__lte=end_date
+        )
+
+    if q1.count() != 0 or q2.count() != 0 or q3.count() != 0:
+        return JsonResponse({"status": "error"})
+    else:
+        return JsonResponse({"status": "success"})
+
 class WkcBookingTemplateView(TemplateView):
     template_name = "wkc_booking.html"
 
@@ -23,52 +50,23 @@ class WkcBookingTemplateView(TemplateView):
         date = request.POST.get("date")
         end_date = request.POST.get("end_date")
         message = request.POST.get("request")
-        # Checking if booking already exists in range of event_date to end_date
-        # Checking for date : START : end_date : END
-        q1 = WKCBooking.objects.filter(event_date__lte=date).filter(end_date__gte=date)
-        # Checking for START : date : END : end_date
-        q2 = WKCBooking.objects.filter(event_date__lte=end_date).filter(
-            end_date__gte=end_date
-        )
-        # Checking for date: START : END : end_date
-        q3 = WKCBooking.objects.filter(event_date__gte=date).filter(
-            end_date__lte=end_date
-        )
-        # Avoiding invalid date inputs
-        if date >= end_date:
-            messages.add_message(
-                request,
-                messages.SUCCESS,
-                f"Event start date cannot be after event end date. Please select a valid date.",
-            )
-            return HttpResponseRedirect(request.path)
-
-        elif q1.count() != 0 or q2.count() != 0 or q3.count() != 0:
-            messages.add_message(
-                request,
-                messages.ERROR,
-                f"There is already a booking in the selected date range. Do you still want to book?",
-            )
-            return HttpResponseRedirect(request.path)
-
-        else:
-            booking = WKCBooking.objects.create(
+        booking = WKCBooking.objects.create(
                 name=name,
                 email=email,
                 event_date=date,
                 end_date=datetime.datetime.strptime(end_date, "%Y-%m-%d %H:%M"),
                 request=message,
             )
-            booking.save()
+        booking.save()
 
-            ed = booking.event_date
+        ed = booking.event_date
             # Converting DateTime object to str
-            ed = datetime.datetime.strptime(ed, "%Y-%m-%d %H:%M")
+        ed = datetime.datetime.strptime(ed, "%Y-%m-%d %H:%M")
             # Converting 24 hr to user friendly format
-            ed = datetime.datetime.strftime(ed, "%d %B, %Y, %I:%M %p")
-            end = booking.end_date
+        ed = datetime.datetime.strftime(ed, "%d %B, %Y, %I:%M %p")
+        end = booking.end_date
             # Converting to 12 hr format + removing date
-            end = datetime.datetime.strftime(end, "%I:%M %p")
+        end = datetime.datetime.strftime(end, "%I:%M %p")
 
             # data = {
             # "name":name,
@@ -88,12 +86,12 @@ class WkcBookingTemplateView(TemplateView):
             # email.content_subtype = "html"
             # email.send()
 
-            messages.add_message(
+        messages.add_message(
                 request,
                 messages.SUCCESS,
                 f"Booking successful on {ed} to {end} for the event : {booking.request} by {name}",
             )
-            return HttpResponseRedirect(request.path)
+        return HttpResponseRedirect(request.path)
 
 
 class Schedule(ListView):
@@ -107,3 +105,4 @@ class Schedule(ListView):
         return WKCBooking.objects.filter(
             event_date__gte=datetime.datetime.now()
         ).order_by("event_date")
+
