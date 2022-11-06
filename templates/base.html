@@ -106,10 +106,15 @@
               >
             </li>
             {% if request.user.is_authenticated %}
-            <li class="nav-item" role="presentation">
-              <a class="nav-link active" href="{% url 'schedule' %}"
-                >View Schedule</a
-              >
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="scheduleDrp" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                View Schedule
+              </a>
+              <div class="dropdown-menu" aria-labelledby="scheduleDrp">
+                <a class="dropdown-item" href="/wkc-schedule">WKC</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/view-schedule">Studio</a>
+              </div>
             </li>
             {% endif %} {% if user.is_superuser %}
             <li class="nav-item" role="presentation">
