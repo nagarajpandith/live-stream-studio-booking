@@ -1,0 +1,261 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <script>
+    $(document).ready(function() {
+      var duration = ["1/2 day", "1 day", "1 1/2 days", "2 days", "2 1/2 days", "3 days"];
+      $("#duration").select2({
+        data: duration,
+        tags: true
+      });
+    });
+  </script>
+  
+
+    <div class="container-fluid px-1 py-5 mx-auto">
+        {% if messages %}
+        <script>
+             $(document).ready(function(){
+            $("#modalMsg").modal('show');
+        });
+        </script>
+        
+        {% endif %}
+
+        <div class="modal" tabindex="-1" role="dialog" id="modalMsg">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content" style="color: #fff;">
+                <div class="modal-header" style="background-color: var(--color-primary-dark);">
+                  <h5 class="modal-title">Booking Status</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff; font-size: 30px;">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body alert-modal" style="color: #000;">
+                    {% for message in messages %}
+                        <p>{{message}} </p>
+                    {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {% comment %} Booking Confirmation Modal {% endcomment %}
+          <div class="modal" tabindex="-1" role="dialog" id="modalClash">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content" style="color: #fff;">
+                <div class="modal-header" style="background-color: var(--color-primary-dark);">
+                  <h5 class="modal-title">Booking Status</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #fff; font-size: 30px;">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body" style="color: #000;">
+                  <p>There is already a booking in the selected date range. Do you still want to book?</p>
+                    <div class="modal-footer">
+                       <button type="button" class="btn btn-primary btn-clash-proceed">Yes</button>
+                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% if request.user.is_authenticated %}
+        <div class="row d-flex mt-100 justify-content-center" style="margin-top: 90px;width: 100vw;">
+            <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+                <h3>
+                    Book WKC
+                </h3>
+                <div class="card p-0">
+                    <form class="form-card booking-from" method="POST" action="{% url 'wkc_booking' %}" id="wkc-booking-form">
+                    {% csrf_token %}
+                        <div class="row justify-content-between text-left">
+
+                            <div class="form-group col-12 flex-column d-flex"> 
+                            <label class="form-control-label px-3">Name<span class="text-danger"> *</span></label> 
+                            <input required type="text" id="name" name="name" placeholder="Enter your Name" onblur="validate(1)"> 
+                        </div>
+
+                        </div>
+
+                        <div class="row justify-content-between text-left">
+
+                            <div class="form-group col-sm-6 flex-column d-flex"> 
+                                <label class="form-control-label px-3">Email<span class="text-danger"> *</span></label> 
+                                <input required type="text" id="email" name="email" placeholder="Enter your Email" onblur="validate(2)"> 
+                            </div>
+
+                            <div class="form-group col-sm-6 flex-column d-flex"> 
+                                <label class="form-control-label px-3">Event Name<span class="text-danger"> *</span></label> 
+                                <input required type="text" id="ans" name="request" placeholder="Enter Event Name" onblur="validate(3)"></input> 
+                            </div>
+
+                        </div>
+
+                        <div class="row justify-content-between text-left">
+
+                            <div class="form-group col-sm-6 flex-column d-flex"> 
+                             <label class="form-control-label px-3">Event Start Time<span class="text-danger"> *</span></label> 
+                              <input required type="text" id="date" name="date" placeholder="YYYY-MM-DD" onblur="validate(4)"> 
+                            </div>
+
+                            <div class="form-group col-sm-6 flex-column d-flex"> 
+                             <label class="form-control-label px-3">Event End Time<span class="text-danger"> *</span></label> 
+                              <input required type="text" id="end_date" name="end_date" placeholder="YYYY-MM-DD" onblur="validate(5)"> 
+                            </div>
+                              
+                            <div class="form-group col-sm-6 flex-column d-flex justify-content-center">
+                              <label class="form-control-label px-3">Duration<span class="text-danger"> *</span></label> 
+                              <select name="duration" id="duration">
+                              </select>
+                            </div>
+
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="form-group col-sm-6"> <button class="btn-block btn-primary btn-book-wkc">Book</button> </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %} 
+    <div style="margin-top: 260px; margin-bottom: 205px; display: flex;flex-direction: column;align-items: center;" class="booking-msg">
+        <h1 class="display-5" style="text-align: center">Please login as Admin to Book the Studio</h1>
+        <p style="text-align: center" class="text-primary">Note: Only Program coordinator is allowed to book Studio for now. Please contact wkc.archives@gmail.com for bookings.</p>
+        <br><a  class="btn btn-success" href="{% url 'admin:index' %}">Login as Admin</a>
+    </div>
+    {% endif %} 
+
+{% endblock content %}
+  {% block footer %}{% endblock footer %}
+  {% block script %}
+    $('#date').datetimepicker({
+        format: "Y-m-d",
+        step: 30,
+        autoclose: true,
+        minDate: 0,
+        timepicker:false,
+    });
+
+    $('#end_date').datetimepicker({
+        format: "Y-m-d",
+        step: 30,
+        autoclose: true,
+        minDate: 0,
+        timepicker:false,
+    });
+
+    function validate(val) {
+    v1 = document.getElementById("name");
+    v2 = document.getElementById("email");
+    v3 = document.getElementById("ans");
+    v4 = document.getElementById("date");
+    v5 = document.getElementById("end_date");
+
+    flag1 = true;
+    flag2 = true;
+    flag3 = true;
+    flag4 = true;
+    flag5 = true;
+
+    if(val>=1 || val==0) {
+    if(v1.value == "") {
+    v1.style.borderColor = "red";
+    flag1 = false;
+    }
+    else {
+    v1.style.borderColor = "green";
+    flag1 = true;
+    }
+    }
+
+    if(val>=2 || val==0) {
+    if(v2.value == "") {
+    v2.style.borderColor = "red";
+    flag2 = false;
+    }
+    else {
+    v2.style.borderColor = "green";
+    flag2 = true;
+    }
+    }
+    
+    if(val>=3 || val==0) {
+    if(v3.value == "") {
+    v3.style.borderColor = "red";
+    flag3 = false;
+    }
+    else {
+    v3.style.borderColor = "green";
+    flag3 = true;
+    }
+    }
+
+    if(val>=4 || val==0) {
+    if(v4.value == "") {
+    v4.style.borderColor = "red";
+    flag4 = false;
+    }
+    else {
+    v4.style.borderColor = "green";
+    flag4 = true;
+    }
+    }
+
+    if(val>=5 || val==0) {
+    if(v5.value == "") {
+    v5.style.borderColor = "red";
+    flag5 = false;
+    }
+    else {
+    v5.style.borderColor = "green";
+    flag5 = true;
+    }
+    }
+
+    flag = flag1 && flag2 && flag3 && flag4 && flag5 ;
+
+    return flag;
+    }
+  document.querySelector(".btn-book-wkc").addEventListener("click", function(event) {
+    event.preventDefault();
+    date = document.getElementById("date");
+    end_date = document.getElementById("end_date");
+    if (date.value > end_date.value) {
+      $('.alert-modal').html("Event start date cannot be after event end date. Please select a valid date.");
+        $('#modalMsg').modal('show');
+        return;
+    }
+    data={
+        date: date.value,
+        end_date: end_date.value,
+      }
+
+    fetch(`${window.location.origin}/api/check-date-clash`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status == "error") {
+          $("#modalClash").modal('show');
+        }
+        else{
+           document.getElementById("wkc-booking-form").submit();
+        }
+      });
+  });
+
+  // select btn-clash-proceed button and add event listener using jquery
+  $(".btn-clash-proceed").click(function () {
+    $("#modalClash").modal('hide');
+    // submit form
+    document.getElementById("wkc-booking-form").submit();
+  });
+ {% endblock script %}

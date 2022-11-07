@@ -3,3 +3,5 @@ env
 db.sqlite3
 .DS_Store
 .vscode
+**/migrations/*
+**/__pycache__/
