@@ -88,12 +88,12 @@
 
                             <div class="form-group col-sm-6 flex-column d-flex"> 
                              <label class="form-control-label px-3">Event Start Time<span class="text-danger"> *</span></label> 
-                              <input required type="text" id="date" name="date" placeholder="YYYY-MM-DD HH:MM" onblur="validate(4)"> 
+                              <input required type="text" id="date" name="date" placeholder="YYYY-MM-DD" onblur="validate(4)"> 
                             </div>
 
                             <div class="form-group col-sm-6 flex-column d-flex"> 
                              <label class="form-control-label px-3">Event End Time<span class="text-danger"> *</span></label> 
-                              <input required type="text" id="end_date" name="end_date" placeholder="YYYY-MM-DD HH:MM" onblur="validate(5)"> 
+                              <input required type="text" id="end_date" name="end_date" placeholder="YYYY-MM-DD" onblur="validate(5)"> 
                             </div>
 
                         </div>
@@ -117,17 +117,19 @@
   {% block footer %}{% endblock footer %}
   {% block script %}
     $('#date').datetimepicker({
-        format: "Y-m-d H:i",
+        format: "Y-m-d",
         step: 30,
         autoclose: true,
         minDate: 0,
+        timepicker:false,
     });
 
     $('#end_date').datetimepicker({
-        format: "Y-m-d H:i",
+        format: "Y-m-d",
         step: 30,
         autoclose: true,
         minDate: 0,
+        timepicker:false,
     });
 
     function validate(val) {
