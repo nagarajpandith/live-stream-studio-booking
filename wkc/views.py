@@ -91,7 +91,7 @@ class WkcBookingTemplateView(TemplateView):
         messages.add_message(
                 request,
                 messages.SUCCESS,
-                f"Booking successful on {date} to {end_date} for the event : {booking.request} by {name}",
+                f"Booking successful on {date} to {end_date} for the event : {booking.request} by {name} for {duration}.",
             )
         return HttpResponseRedirect(request.path)
 

@@ -2,18 +2,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-  <script>
-    $(document).ready(function() {
-      var duration = ["1/2 day", "1 day", "1 1/2 days", "2 days", "2 1/2 days", "3 days"];
-      $("#duration").select2({
-        data: duration,
-        tags: true
-      });
-    });
-  </script>
-  
-
     <div class="container-fluid px-1 py-5 mx-auto">
         {% if messages %}
         <script>
@@ -105,14 +93,18 @@
                              <label class="form-control-label px-3">Event End Time<span class="text-danger"> *</span></label> 
                               <input required type="text" id="end_date" name="end_date" placeholder="YYYY-MM-DD" onblur="validate(5)"> 
                             </div>
-                              
-                            <div class="form-group col-sm-6 flex-column d-flex justify-content-center">
-                              <label class="form-control-label px-3">Duration<span class="text-danger"> *</span></label> 
-                              <select name="duration" id="duration">
-                              </select>
-                            </div>
 
                         </div>
+
+                        <div class="row justify-content-between text-left">
+
+                          <div class="form-group col-sm-12 flex-column d-flex"> 
+                              <label class="form-control-label px-3">Duration<span class="text-danger"> *</span></label> 
+                              <input required type="text" id="duration" name="duration" placeholder="Enter Duration"> 
+                          </div>
+
+                      </div>
+
                         <div class="row justify-content-center">
                             <div class="form-group col-sm-6"> <button class="btn-block btn-primary btn-book-wkc">Book</button> </div>
                         </div>
