@@ -13,6 +13,7 @@
       <th>Event</th>
       <th>Start Date</th>
       <th>End Date</th>
+      <th>Duration</th>
     </tr>
     {% for bookings in schedule %}
     <tr>
@@ -20,6 +21,7 @@
       <td class="cell-event">{{bookings.request}}</td>
       <td class="cell-date">{{bookings.event_date}}</td>
       <td class="cell-date">{{bookings.end_date}}</td>
+      <td class="cell-date">{{bookings.duration}}</td>
     </tr>
     {% endfor %}
   </table>

@@ -7,6 +7,7 @@ class WKCBooking(models.Model):
     end_date = models.DateTimeField(blank=True, null=True)
     request = models.CharField(max_length=50)
     sent_date = models.DateField(auto_now_add=True)
+    duration = models.CharField(max_length=50, blank=True, null=True)
     # accepted = models.BooleanField(default=False)
     # rejected=models.BooleanField(default=False)
     # accepted_date = models.DateField(auto_now_add=False, null=True, blank=True)

@@ -50,12 +50,14 @@ class WkcBookingTemplateView(TemplateView):
         date = request.POST.get("date")
         end_date = request.POST.get("end_date")
         message = request.POST.get("request")
+        duration = request.POST.get("duration")
         booking = WKCBooking.objects.create(
                 name=name,
                 email=email,
                 event_date=date,
                 end_date=datetime.datetime.strptime(end_date, "%Y-%m-%d"),
                 request=message,
+                duration=duration,
             )
         booking.save()
 
