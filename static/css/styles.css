@@ -245,7 +245,9 @@ width: 13%;
 }
 
 /* Nav-Bar */
-
+.navbar .navbar-collapse{
+  justify-content: flex-end;
+}
 .header .navbar-nav .nav-link {
   transition: all ease-in 0.5s;
 }

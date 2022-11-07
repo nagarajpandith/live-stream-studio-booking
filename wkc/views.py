@@ -54,19 +54,19 @@ class WkcBookingTemplateView(TemplateView):
                 name=name,
                 email=email,
                 event_date=date,
-                end_date=datetime.datetime.strptime(end_date, "%Y-%m-%d %H:%M"),
+                end_date=datetime.datetime.strptime(end_date, "%Y-%m-%d"),
                 request=message,
             )
         booking.save()
 
-        ed = booking.event_date
-            # Converting DateTime object to str
-        ed = datetime.datetime.strptime(ed, "%Y-%m-%d %H:%M")
-            # Converting 24 hr to user friendly format
-        ed = datetime.datetime.strftime(ed, "%d %B, %Y, %I:%M %p")
-        end = booking.end_date
-            # Converting to 12 hr format + removing date
-        end = datetime.datetime.strftime(end, "%I:%M %p")
+        # ed = booking.event_date
+        #     # Converting DateTime object to str
+        # ed = datetime.datetime.strptime(ed, "%Y-%m-%d")
+        #     # Converting 24 hr to user friendly format
+        # # ed = datetime.datetime.strftime(ed, "%d %B, %Y, %I:%M %p")
+        # end = booking.end_date
+        #     # Converting to 12 hr format + removing date
+        # end = datetime.datetime.strftime(end, "%Y-%m-%d")
 
             # data = {
             # "name":name,
@@ -89,7 +89,7 @@ class WkcBookingTemplateView(TemplateView):
         messages.add_message(
                 request,
                 messages.SUCCESS,
-                f"Booking successful on {ed} to {end} for the event : {booking.request} by {name}",
+                f"Booking successful on {date} to {end_date} for the event : {booking.request} by {name}",
             )
         return HttpResponseRedirect(request.path)
 
